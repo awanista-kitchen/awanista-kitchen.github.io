@@ -1032,7 +1032,7 @@ main[hidden]{display:none!important}
     </div>
     <div class="mv-stage" id="mv-stage" data-rv data-delay="150">
       <div class="mv-podium" aria-hidden="true"></div>
-      <model-viewer id="mv-main" camera-controls touch-action="pan-y" interaction-prompt="none"
+      <model-viewer id="mv-main" camera-controls touch-action="pan-y" disable-zoom disable-pan interaction-prompt="none"
         shadow-intensity="1.1" shadow-softness=".8" exposure="1.08" environment-image="neutral"
         alt="عارض النماذج ثلاثية الأبعاد"></model-viewer>
       <div class="mv-name">
@@ -1506,6 +1506,17 @@ $$('.p-card').forEach(el=>revObs.observe(el));
   const catEl=$('#mv-cat'),oldEl=$('#mv-old'),rateEl=$('#mv-rate'),specEl=$('#mv-specs'),infoEl=$('#mv-info');
   if(!stage||!main)return;
   let cur=0,rotating=!reduceMotion,swT=null,lastBlob=null,loadToken=0;
+  /* some GLBs (cooking pot) ship a "Glass" material with alphaMode BLEND —
+     the model looks see-through. Force every material opaque once it loads */
+  main.addEventListener('load',()=>{
+    try{
+      const mo=main.model;if(!mo||!mo.materials)return;
+      mo.materials.forEach(mt=>{
+        try{if(mt.alphaMode&&mt.alphaMode!=='OPAQUE')mt.alphaMode='OPAQUE'}
+        catch(e){try{mt.setAlphaMode&&mt.setAlphaMode('OPAQUE')}catch(e2){}}
+      });
+    }catch(e){}
+  });
   const FORCE_JS=/[?&#]protojs=1/.test(location.search+'#'+location.hash);
   MODELS.forEach(m=>m.key=m.src.split('/').pop().replace(/\.glb$/,''));
   chipsEl.innerHTML=MODELS.map((m,i)=>`<button class="mv-chip ${i?'':'active'}" data-m="${i}">${m.name}</button>`).join('');
