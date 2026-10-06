@@ -1,0 +1,7 @@
+shots/
+__pycache__/
+.mimosa/
+old-v1.html
+patch_*.py
+fix_tray.js
+*.log
