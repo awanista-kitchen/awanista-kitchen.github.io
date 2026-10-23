@@ -477,7 +477,7 @@ function toastShow(msg){
 }
 function cartCount(){return cartArr.reduce((s,it)=>s+it.qty,0)}
 function cartSum(){return cartArr.reduce((s,it)=>s+it.qty*it.n,0)}
-const WA_NUM='201151784803';
+const WA_NUM='201029282833';
 /* ---------- order photos → WhatsApp ----------
    wa.me links can't carry files, so:
    • phones  → native share sheet: the actual photo file(s) + order text go
@@ -725,53 +725,42 @@ $('#pm-add').addEventListener('click',()=>{
 /* ---------- COMING SOON MODAL (3 cards: سكاكين / ARSHIA PLUS / ترمسات) ---------- */
 const SOON3=[
  {name:'أطقم سكاكين على حامل',cat:'أطقم سكاكين',
-  foot:'كلهم أطقم سكاكين على حامل وأصليين — بيوصلوا قريب جدًا لمتجر أوانيستا.',
-  opts:[
-   {k:'طقم Bass',img:'img/i085.webp',d:'سكاكين استانلس على حامل دائري بعلامة Bass — ملمس فاخر وثبات عالي.'},
-   {k:'طقم ARSHIA',img:'img/i086.webp',d:'سكاكين استانلس على حامل دوار بعلامة ARSHIA الأصلية.'},
-   {k:'طقم البركة — أسود وروز جولد',img:'img/i087.webp',d:'٩ قطعة على حامل أكريليك — أسود وروز جولد من شركة البركة.'}]},
+  imgs:['img/i085.webp','img/i086.webp','img/i087.webp'],
+  colors:'٣ موديلات أصلية على حامل: طقم Bass بحامل دائري، وطقم ARSHIA بحامل دوار، وطقم البركة ٩ قطعة — أسود × روز جولد.',
+  desc:'سكاكين استانلس أصليه على حامل أنيق — ملمس فاخر وثبات عالي، وكل موديل بيجي بحامله اللي يليق بأي مطبخ.',
+  foot:'كلهم أطقم سكاكين على حامل وأصليين — بيوصلوا قريب جدًا لمتجر أوانيستا.'},
  {name:'أطقم حلل ومقالي ARSHIA PLUS',cat:'أطقم حلل ومقالي',
-  foot:'نفس الموديل بالظبط — الفرق في اللون بس. بيوصل قريب جدًا لمتجر أوانيستا.',
-  opts:[
-   {k:'اللون الأسود',img:'img/i088.webp',d:'طقم حلل ومقالي ARSHIA PLUS بتشطيب مطروق — اللون الأسود.'},
-   {k:'اللون الأخضر',img:'img/i089.webp',d:'نفس موديل الأسود بالظبط — باللون الأخضر.'}]},
+  imgs:['img/i088.webp','img/i089.webp'],
+  colors:'نفس الموديل بالظبط متوفر بلونين: الأسود والأخضر.',
+  desc:'طقم حلل ومقالي ARSHIA PLUS بتشطيب مطروق فاخر — توزيع حرارة ممتاز وسهل التنظيف، وبمقاسات تناسب كل بيت.',
+  foot:'نفس الموديل بالظبط — الفرق في اللون بس. بيوصل قريب جدًا لمتجر أوانيستا.'},
  {name:'ترمسات EL ANDALOS GROUP',cat:'ترمسات',
-  foot:'كلها نفس الماركة ونفس الستايل المضلع بالذهبي — بتوصل قريب جدًا لمتجر أوانيستا.',
-  opts:[
-   {k:'الأسود',img:'img/i090.webp',d:'ستايل مضلع بلمسات دهبي وحلزون مبهرة — اللون الأسود.'},
-   {k:'البيج الفاتح (كريمي)',img:'img/i091.webp',d:'حلق دهبي ومقبض دهبي لامع — اللون الكريمي الفاتح.'},
-   {k:'البيج الغامق',img:'img/i092.webp',d:'نفس الستايل المضلع باللمسات الدهبية — اللون البيج الغامق.'},
-   {k:'الكريمي الطويل',img:'img/i093.webp',d:'موديل طويل مضلع بمقبض دهبي محزز — اللون الكريمي.'},
-   {k:'البيج الوردي الطويل',img:'img/i094.webp',d:'موديل طويل مضلع بمقبض دهبي محزز — اللون البيج الوردي.'}]}
+  imgs:['img/i090.webp','img/i091.webp','img/i092.webp','img/i093.webp','img/i094.webp'],
+  colors:'٥ ألوان متاحة: الأسود، البيج الفاتح (كريمي)، البيج الغامق، الكريمي الطويل، والبيج الوردي الطويل.',
+  desc:'ترمسات مضلعة بلمسات دهبي — حلزون مبهرة وحافظة للحرارة، ومقابض دهبي لامع أو محزز حسب الموديل. ستايل يليق بالضيافة المصرية.',
+  foot:'كلها نفس الماركة ونفس الستايل المضلع بالذهبي — بتوصل قريب جدًا لمتجر أوانيستا.'}
 ];
-let pmSoon=null,pmSoonOpt=0;
-function soonDesc(){
-  const s=SOON3[pmSoon],o=s.opts[pmSoonOpt];
-  $('#pm-desc').innerHTML='<div class="fi">'+o.d+'</div><div class="fi">'+s.foot+'</div>';
-}
+let pmSoon=null;
 function openSoon(j){
-  pmSoon=j;pmSoonOpt=0;const s=SOON3[j];
+  pmSoon=j;const s=SOON3[j],imgs=s.imgs;
   pmEl.classList.add('soon');
   $('#pm-cat').textContent=s.cat;
   $('#pm-name').textContent=s.name;
-  $('#pm-opts').innerHTML=s.opts.map(function(o,k){return '<button class="pm-opt '+(k?'':'on')+'" data-o="'+k+'">'+o.k+'</button>'}).join('');
-  $('#pm-opts').style.display='flex';
-  $('#pm-photo').innerHTML='<img id="pm-img" src="'+s.opts[0].img+'" loading="lazy" decoding="async" alt="'+s.name+'">';
-  $('#pm-thumbs').innerHTML='';
-  soonDesc();
+  var optsEl=$('#pm-opts');optsEl.innerHTML='';optsEl.style.display='none';
+  $('#pm-photo').innerHTML='<img id="pm-img" src="'+imgs[0]+'" loading="lazy" decoding="async" alt="'+s.name+'">';
+  var thumbs=$('#pm-thumbs');
+  thumbs.innerHTML=imgs.length>1?imgs.map(function(im,k){return '<img loading="lazy" src="'+im+'" data-k="'+k+'" class="'+(k?'':'on')+'" alt="">'}).join(''):'';
+  thumbs.onclick=function(e){
+    const t=e.target.closest('img');if(!t)return;
+    const pim=$('#pm-img');pim.style.opacity=0;
+    setTimeout(function(){pim.src=imgs[+t.dataset.k];pim.style.opacity=1},170);
+    thumbs.querySelectorAll('img').forEach(function(im2,k2){im2.classList.toggle('on',k2===+t.dataset.k)});
+  };
+  $('#pm-desc').innerHTML='<div class="fi pm-colors">'+s.colors+'</div><div class="fi">'+s.desc+'</div><div class="fi">'+s.foot+'</div>';
   document.body.classList.add('pm-open');
   document.documentElement.classList.add('lock');
   history.pushState({pm:1},'');pmFromPop=false;
 }
-$('#pm-opts').addEventListener('click',function(e){
-  if(pmSoon==null)return;
-  const b=e.target.closest('.pm-opt');if(!b)return;
-  pmSoonOpt=+b.dataset.o;
-  $$('#pm-opts .pm-opt').forEach(function(el,k){el.classList.toggle('on',k===pmSoonOpt)});
-  const im=$('#pm-img');
-  if(im){im.style.opacity=0;setTimeout(function(){im.src=SOON3[pmSoon].opts[pmSoonOpt].img;im.style.opacity=1},170)}
-  soonDesc();
-});
 $('#soon-grid').addEventListener('click',function(e){
   const c=e.target.closest('.s-card');if(c)openSoon(+c.dataset.soon)});
 $('#soon-grid').addEventListener('keydown',function(e){
@@ -954,19 +943,54 @@ toTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduceMotion?'auto':
   els.forEach(el=>cObs.observe(el));
 })();
 
-/* ---------- VISUAL BOOST: coming-soon notify (WhatsApp) ---------- */
+/* ---------- TASK20: نبّهني لما يوصل — real subscriptions + arrival alert ----------
+   1) العميل يسيب رقمه → رقمه بيتحفظ على الموقع (localStorage) + بيوصل صاحب المتجر فورًا على واتساب برسالة جاهزة فيها الرقم
+   2) لما تشكيلة «قريبًا» تنزل للبيع: حدّث AW_ARRIVALS تحت (خلي القيمة true وزوّد v بـ1)
+      → أي عميل سجّل رقمه هيلاقي إشعار «التشكيلة وصلت!» أول ما يفتح الموقع تاني */
+var AW_ARRIVALS=window.AW_ARRIVALS||{v:1,knives:false,plus:false,thermos:false};
 (function(){
-  const f=$('#sn-form');if(!f)return;
-  f.addEventListener('submit',function(e){
+  var KEY='aw_notify_subs';
+  function subs(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}}
+  function saveSubs(a){try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}
+  var f=$('#sn-form');
+  if(f)f.addEventListener('submit',function(e){
     e.preventDefault();
-    const inp=$('#sn-phone');
-    let v=(inp.value||'').replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).replace(/\D/g,'');
+    var inp=$('#sn-phone');
+    var v=(inp.value||'').replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).replace(/\D/g,'');
     if(!/^01\d{9}$/.test(v)){toastShow('اكتب رقم موبايل صحيح — ١١ رقم يبدأ بـ ٠١');inp.focus();return}
-    const msg='أهلًا أوانيستا 👋\nعايز نبّهني لما تشكيلة «قريبًا على أوانيستا» توصل المتجر.\nرقمي: '+v;
-    window.open('https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg),'_blank');
-    toastShow('تم! هنبعتلك أول ما التشكيلة توصل 🎉');
+    var list=subs();
+    if(!list.some(function(s){return s.p===v})){list.push({p:v,c:'all',t:Date.now()});saveSubs(list)}
+    try{localStorage.setItem('aw_notify_me','1')}catch(err){}
+    f.classList.add('done');
+    var b=f.querySelector('.sn-btn');if(b)b.textContent='اتسجلت ✓';
+    toastShow('اتسجلت! هنبعتلك على واتساب أول ما التشكيلة توصل 🎉');
     inp.value='';
+    var msg='أهلًا أوانيستا 👋\nعايز نبّهني لما تشكيلة «قريبًا على أوانيستا» توصل المتجر.\nرقمي: '+v+'\nسيبوا رقمي وجاوبوني على واتساب أول ما توصل، شكرًا.';
+    window.open('https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg),'_blank');
   });
+  try{
+    var mine=subs(),hit=[];
+    if(mine.length){
+      if(AW_ARRIVALS.knives)hit.push('أطقم السكاكين');
+      if(AW_ARRIVALS.plus)hit.push('أطقم ARSHIA PLUS');
+      if(AW_ARRIVALS.thermos)hit.push('الترمسات');
+    }
+    var seen=+(localStorage.getItem('aw_notified_v')||0);
+    if(hit.length&&seen<AW_ARRIVALS.v){
+      var el=document.getElementById('arrive');
+      if(el){
+        var tx=document.getElementById('arr-cols');
+        if(tx)tx.textContent=hit.join(' + ')+' بقت متاحة للطلب دلوقتي';
+        var cta=document.getElementById('arr-cta');
+        if(cta)cta.href='https://wa.me/'+WA_NUM;
+        el.classList.add('show');
+        var x=document.getElementById('arr-x');
+        if(x)x.addEventListener('click',function(){el.classList.remove('show')});
+      }
+      toastShow('التشكيلة اللي استنيتها وصلت! 🔥');
+      try{localStorage.setItem('aw_notified_v',String(AW_ARRIVALS.v))}catch(err){}
+    }
+  }catch(err){}
 })();
 
 /* ---------- VISUAL BOOST: section dots nav ---------- */

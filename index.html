@@ -94,7 +94,7 @@ section[id],footer[id]{scroll-margin-top:76px}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
 /* reveal on scroll — rise (default) / pop / right / left / wipe / blur */
-[data-rv]{opacity:0;transform:translateY(26px);
+[data-rv]{opacity:0;transform:translateY(26px) scale(.985);
   transition:opacity .7s var(--ease),transform .7s var(--ease),clip-path .85s var(--ease)}
 [data-rv="pop"]{transform:scale(.9)}
 [data-rv="right"]{transform:translateX(46px)}
@@ -424,7 +424,7 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
 .pm-soon svg{width:17px;height:17px;flex:none}
 .pmodal.soon .pm-soon{display:flex}
 .pmodal.soon .pm-rate,.pmodal.soon .pm-prices,.pmodal.soon .pm-qtyrow,.pmodal.soon .pm-addbtn,
-.pmodal.soon .pm-thumbs,.pmodal.soon .pm-body>.pm-note{display:none}
+.pmodal.soon .pm-body>.pm-note{display:none}
 @media (max-width:560px){
   .s-card{border-radius:16px}
   .s-tile .p-img{padding:8px}
@@ -887,6 +887,33 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
   .p-card:hover::before,.s-card:hover::before{animation:none}
   html::after{mix-blend-mode:normal;opacity:.035}
 }
+/* ===== TASK20: notify done-state + arrival alert + soon gallery ===== */
+.pmodal.soon .pm-opts{display:none!important}
+.pm-colors{font-weight:800;color:var(--gold-deep)}
+#sn-form.done .sn-btn{background:linear-gradient(135deg,#6d8a45,#4d6a30);box-shadow:0 10px 24px -12px rgba(77,106,48,.6)}
+#sn-form.done #sn-phone{border-color:rgba(109,138,69,.55)}
+.arrive{position:fixed;top:16px;left:0;right:0;margin:0 auto;width:min(620px,94vw);z-index:1300;display:flex;align-items:center;gap:12px;
+  padding:13px 15px;border-radius:18px;background:var(--card);border:1.5px solid rgba(156,118,32,.45);
+  box-shadow:0 26px 60px -22px rgba(36,27,16,.5);opacity:0;visibility:hidden;transform:translateY(-16px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease),visibility 0s linear .45s}
+.arrive.show{opacity:1;visibility:visible;transform:none;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.arr-ic{width:44px;height:44px;flex:none;border-radius:14px;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold-deep));box-shadow:0 8px 18px -8px rgba(111,85,24,.65)}
+.arr-ic svg{width:22px;height:22px}
+.arr-tx{flex:1;min-width:0}
+.arr-tx b{display:block;font-family:var(--font-d);font-size:1.02rem;color:var(--ink)}
+.arr-tx span{display:block;color:var(--mut);font-size:.78rem;font-weight:600;margin-top:2px}
+.arr-cta{flex:none;padding:10px 16px;font-size:.88rem}
+.arr-x{flex:none;width:32px;height:32px;border:none;border-radius:10px;background:var(--soft);color:var(--mut);cursor:pointer;display:grid;place-items:center;transition:background .2s ease,color .2s ease}
+.arr-x:hover{background:var(--soft-2);color:var(--ink)}
+.arr-x svg{width:14px;height:14px}
+@media (max-width:640px){
+  .arrive{flex-wrap:wrap;top:10px;gap:10px}
+  .arr-cta{flex:1 1 auto;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .arrive{transition:none}
+}
 </style>
 </head>
 <body>
@@ -1068,10 +1095,10 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
 
 <div class="trust" aria-hidden="true">
   <div class="container">
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h3.5l2.5 3v3h-6z"/><circle cx="7" cy="18" r="1.7"/><circle cx="16.5" cy="18" r="1.7"/></svg> توصيل ٤٨ ساعة لكل المحافظات</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg> ضمان سنتين كاملة</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> إرجاع مجاني خلال ١٤ يوم</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg> دعم ٢٤/٧ برد خلال دقايق</span>
+    <span data-rv data-delay="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h3.5l2.5 3v3h-6z"/><circle cx="7" cy="18" r="1.7"/><circle cx="16.5" cy="18" r="1.7"/></svg> توصيل ٤٨ ساعة لكل المحافظات</span>
+    <span data-rv data-delay="60"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg> ضمان سنتين كاملة</span>
+    <span data-rv data-delay="120"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg> إرجاع مجاني خلال ١٤ يوم</span>
+    <span data-rv data-delay="180"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg> دعم ٢٤/٧ برد خلال دقايق</span>
   </div>
 </div>
 
@@ -1096,7 +1123,7 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
 
 
 <!-- ================= STORE (كل المنتجات + الفلاتر) ================= -->
-<div class="squig" aria-hidden="true"></div>
+<div class="squig" aria-hidden="true" data-rv></div>
 <section class="products" id="store">
   <div class="container">
     <button class="shop-back" id="shop-back" type="button">
@@ -1159,7 +1186,7 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
           <div class="p-cat">أطقم سكاكين</div>
           <h3 class="p-name">أطقم سكاكين على حامل</h3>
           <p class="s-note">٣ ماركات أصلية — Bass وARSHIA والبركة، كلهم على حامل.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الألوان والموديلات</span></div>
+          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الصور والتفاصيل</span></div>
         </div>
       </article>
       <article class="s-card" data-soon="1" data-rv data-delay="60" role="button" tabindex="0" aria-label="شوف تفاصيل أطقم حلل ومقالي ARSHIA PLUS">
@@ -1171,7 +1198,7 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
           <div class="p-cat">أطقم حلل ومقالي</div>
           <h3 class="p-name">أطقم حلل ومقالي ARSHIA PLUS</h3>
           <p class="s-note">نفس الموديل بالظبط متوفر بلونين — أسود وأخضر.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الألوان والموديلات</span></div>
+          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الصور والتفاصيل</span></div>
         </div>
       </article>
       <article class="s-card" data-soon="2" data-rv data-delay="120" role="button" tabindex="0" aria-label="شوف تفاصيل ترمسات EL ANDALOS GROUP">
@@ -1183,7 +1210,7 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
           <div class="p-cat">ترمسات</div>
           <h3 class="p-name">ترمسات EL ANDALOS GROUP</h3>
           <p class="s-note">٥ ألوان — ستايل مضلع بلمسات دهبي وحافظ للحرارة.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الألوان والموديلات</span></div>
+          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الصور والتفاصيل</span></div>
         </div>
       </article>
     </div>
@@ -1211,7 +1238,7 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
 </section>
 
 
-<div class="squig" aria-hidden="true"></div>
+<div class="squig" aria-hidden="true" data-rv></div>
 <section class="mv3d" id="ring">
   <div class="container">
     <div class="sec-head">
@@ -1372,22 +1399,22 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
 <footer id="contact">
   <div class="container">
     <div class="foot-grid">
-      <div>
+      <div data-rv>
         <a href="#home" class="logo">
           <img class="logo-img" alt="أوانيستا" data-logo src="img/logo.webp">
           أوانيستا
         </a>
         <p>بنصنع تجربة تسوّق مصرية لأدوات مطبخ تليق بوصفاتك. جودة مختارة بعناية، وتوصيل يوصل لكل المحافظات.</p>
-        <a class="wa-btn" href="https://wa.me/201151784803" target="_blank" rel="noopener">
+        <a class="wa-btn" href="https://wa.me/201029282833" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></svg>
           اطلب على الواتساب — رد فوري
         </a>
         <div class="socials">
           <a href="https://www.facebook.com/profile.php?id=61582605814655" target="_blank" rel="noopener" aria-label="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H9v3h2.3v7h2.2z"/></svg></a>
-          <a href="https://wa.me/201151784803" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></svg></a>
+          <a href="https://wa.me/201029282833" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></svg></a>
         </div>
       </div>
-      <div>
+      <div data-rv data-delay="80">
         <h4>روابط سريعة</h4>
         <ul>
           <li><a href="#home">الرئيسية</a></li>
@@ -1396,16 +1423,16 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
           <li><a href="#reviews">آراء العملاء</a></li>
         </ul>
       </div>
-      <div>
+      <div data-rv data-delay="160">
         <h4>تواصل معنا</h4>
         <ul class="f-contact">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 2z"/></svg> <a href="tel:+201151784803" dir="ltr" style="color:inherit">+20 11 5178 4803</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 2z"/></svg> <a href="tel:+201029282833" dir="ltr" style="color:inherit">+20 10 2928 2833</a></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg> <a href="mailto:awanista249@gmail.com" style="color:inherit">awanista249@gmail.com</a></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> القاهرة، مصر</li>
         </ul>
       </div>
     </div>
-    <div class="foot-bar">
+    <div class="foot-bar" data-rv data-delay="120">
       <span>© <span id="yr">٢٠٢٦</span> أوانيستا — كل الحقوق محفوظة</span>
       <span class="vela"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg>Created by <b>Vela Studio</b></span>
       <span>اتعمل بحب في مصر <b>♥</b></span>
@@ -1425,6 +1452,12 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
 <div class="toast" id="toast">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
   <span id="toast-msg">اتضاف للسلة — شكراً ليك!</span>
+</div>
+<div class="arrive" id="arrive" role="alert" aria-live="polite">
+  <div class="arr-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+  <div class="arr-tx"><b>التشكيلة اللي استنيتها وصلت! 🔥</b><span id="arr-cols">بقت متاحة للطلب دلوقتي</span></div>
+  <a class="btn btn-primary arr-cta" id="arr-cta" href="https://wa.me/201029282833" target="_blank" rel="noopener">اطلب دلوقتي</a>
+  <button class="arr-x" id="arr-x" type="button" aria-label="قفل الإشعار"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
 </div>
 <button class="to-top" id="to-top" aria-label="العودة للأعلى">
   <svg class="tt-ring" viewBox="0 0 50 50"><circle cx="25" cy="25" r="23"/></svg>
