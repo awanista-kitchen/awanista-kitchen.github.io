@@ -21,51 +21,10 @@ $('#yr').textContent=arInt(new Date().getFullYear());
 window.addEventListener('error',e=>{window.__lastErr=String(e.message||e)+' @'+String(e.filename||'').split('/').pop()+':'+e.lineno});
 function maxY(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)}
 
-/* ---------- LOADER: always plays, 2.5s ---------- */
-const ld=$('#loader');
-function ldDone(){
-  if(!ld||ld.classList.contains('out'))return;
-  ld.classList.add('out');
-  document.body.classList.add('loaded');
-  document.documentElement.classList.remove('lock');
-  setTimeout(()=>{ld&&ld.remove()},650);
-}
-if(ld&&!reduceMotion){
-  document.documentElement.classList.add('lock');
-  const ldFill=ld.querySelector('.ld-brand-fill'),
-        ldNum=ld.querySelector('.ld-num'),
-        ldBar=ld.querySelector('.ld-bar i'),
-        ldRing=ld.querySelector('.ld-ring .prog'),
-        ldTag=ld.querySelector('.ld-tag'),
-        ldImg=ld.querySelector('.ld-stage img'),
-        navLogo=$('.logo-img');
-  if(ldImg&&navLogo&&navLogo.getAttribute('src'))ldImg.src=navLogo.getAttribute('src');
-  /* hero + footer logos reuse the nav logo (saves ~0.9MB) */
-  $$('img[data-logo]').forEach(im=>{im.src=navLogo.getAttribute('src')});
-  const LD_TAGS=['بنجهّز المطبخ…','بنصّف الأواني…','أهلاً بيك في أوانيستا'];
-  const RD=2*Math.PI*78;
-  ldRing.style.strokeDasharray=RD;
-  ldRing.style.strokeDashoffset=RD;
-  const LD_DUR=2500,ldT0=performance.now();
-  let ldTi=-1;
-  (function ldTick(){
-    const p=clamp((performance.now()-ldT0)/LD_DUR,0,1);
-    ldFill.style.clipPath='inset('+arDec((1-p)*100,1)+'% 0 0 0)';
-    ldRing.style.strokeDashoffset=RD*(1-p);
-    ldBar.style.width=(p*100)+'%';
-    ldNum.textContent=arInt(Math.round(p*100))+'٪';
-    const ti=Math.min(LD_TAGS.length-1,Math.floor(p*LD_TAGS.length));
-    if(ti!==ldTi){ldTi=ti;ldTag.style.opacity=0;setTimeout(()=>{ldTag.textContent=LD_TAGS[ti];ldTag.style.opacity=1},150)}
-    if(p<1)requestAnimationFrame(ldTick);
-    else{ld.classList.add('done');setTimeout(ldDone,150)}
-  })();
-  setTimeout(ldDone,3800);
-}else{
-  if(ld)ld.remove();
-  document.body.classList.add('loaded');
-  const navLogo=$('.logo-img');
-  if(navLogo)$$('img[data-logo]').forEach(im=>{im.src=navLogo.getAttribute('src')});
-}
+/* ---------- page ready (no loading screen) ---------- */
+document.body.classList.add('loaded');
+const navLogo=$('.logo-img');
+if(navLogo)$$('img[data-logo]').forEach(im=>{im.src=navLogo.getAttribute('src')});
 
 /* ---------- NAV: glass bg + active section sync ---------- */
 const nav=$('#nav');
@@ -762,7 +721,7 @@ if(location.hash.length>1){
     if(el){const top=clamp(el.getBoundingClientRect().top+scrollY-70,0,maxY());
       try{scrollTo({top,behavior:'auto'})}catch(err){scrollTo(0,top)}}
   };
-  setTimeout(goDeep,reduceMotion?60:2850);
+  setTimeout(goDeep,reduceMotion?60:150);
 }
 
 
