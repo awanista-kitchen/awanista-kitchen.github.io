@@ -21,10 +21,51 @@ $('#yr').textContent=arInt(new Date().getFullYear());
 window.addEventListener('error',e=>{window.__lastErr=String(e.message||e)+' @'+String(e.filename||'').split('/').pop()+':'+e.lineno});
 function maxY(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)}
 
-/* ---------- page ready (loader screen removed) ---------- */
-document.body.classList.add('loaded');
-const navLogo=$('.logo-img');
-if(navLogo)$$('img[data-logo]').forEach(im=>{im.src=navLogo.getAttribute('src')});
+/* ---------- LOADER: always plays, 2.5s ---------- */
+const ld=$('#loader');
+function ldDone(){
+  if(!ld||ld.classList.contains('out'))return;
+  ld.classList.add('out');
+  document.body.classList.add('loaded');
+  document.documentElement.classList.remove('lock');
+  setTimeout(()=>{ld&&ld.remove()},650);
+}
+if(ld&&!reduceMotion){
+  document.documentElement.classList.add('lock');
+  const ldFill=ld.querySelector('.ld-brand-fill'),
+        ldNum=ld.querySelector('.ld-num'),
+        ldBar=ld.querySelector('.ld-bar i'),
+        ldRing=ld.querySelector('.ld-ring .prog'),
+        ldTag=ld.querySelector('.ld-tag'),
+        ldImg=ld.querySelector('.ld-stage img'),
+        navLogo=$('.logo-img');
+  if(ldImg&&navLogo&&navLogo.getAttribute('src'))ldImg.src=navLogo.getAttribute('src');
+  /* hero + footer logos reuse the nav logo (saves ~0.9MB) */
+  $$('img[data-logo]').forEach(im=>{im.src=navLogo.getAttribute('src')});
+  const LD_TAGS=['بنجهّز المطبخ…','بنصّف الأواني…','أهلاً بيك في أوانيستا'];
+  const RD=2*Math.PI*78;
+  ldRing.style.strokeDasharray=RD;
+  ldRing.style.strokeDashoffset=RD;
+  const LD_DUR=2500,ldT0=performance.now();
+  let ldTi=-1;
+  (function ldTick(){
+    const p=clamp((performance.now()-ldT0)/LD_DUR,0,1);
+    ldFill.style.clipPath='inset('+arDec((1-p)*100,1)+'% 0 0 0)';
+    ldRing.style.strokeDashoffset=RD*(1-p);
+    ldBar.style.width=(p*100)+'%';
+    ldNum.textContent=arInt(Math.round(p*100))+'٪';
+    const ti=Math.min(LD_TAGS.length-1,Math.floor(p*LD_TAGS.length));
+    if(ti!==ldTi){ldTi=ti;ldTag.style.opacity=0;setTimeout(()=>{ldTag.textContent=LD_TAGS[ti];ldTag.style.opacity=1},150)}
+    if(p<1)requestAnimationFrame(ldTick);
+    else{ld.classList.add('done');setTimeout(ldDone,150)}
+  })();
+  setTimeout(ldDone,3800);
+}else{
+  if(ld)ld.remove();
+  document.body.classList.add('loaded');
+  const navLogo=$('.logo-img');
+  if(navLogo)$$('img[data-logo]').forEach(im=>{im.src=navLogo.getAttribute('src')});
+}
 
 /* ---------- NAV: glass bg + active section sync ---------- */
 const nav=$('#nav');
@@ -350,23 +391,35 @@ $('#shop-back').addEventListener('click',function(){closeShop()});
   chipsEl.innerHTML=MODELS.map((m,i)=>`<button class="mv-chip ${i?'':'active'}" data-m="${i}">${m.name}</button>`).join('');
   /* GLB delivery: over http use the file directly; on file:// fetch is CORS-blocked,
      so models are pre-baked as base64 JS and turned into a Blob URL */
+  const blobCache={};
   function toBlob(key){
+    if(blobCache[key])return blobCache[key];
     const bin=atob(window.__GLB[key]),len=bin.length,bytes=new Uint8Array(len);
     for(let i=0;i<len;i++)bytes[i]=bin.charCodeAt(i);
     const url=URL.createObjectURL(new Blob([bytes],{type:'model/gltf-binary'}));
-    if(lastBlob)URL.revokeObjectURL(lastBlob);
-    lastBlob=url;return url;
+    blobCache[key]=url;return url;
   }
   function glbUrl(m){
-    return new Promise((res,rej)=>{
-      if(window.__GLB&&window.__GLB[m.key]){res(toBlob(m.key));return}
-      if(!FORCE_JS&&location.protocol!=='file:'){res(m.src+'?v=6');return}
-      const s=document.createElement('script');
-      s.src='models/js/'+m.key+'.js';
-      s.onload=()=>{try{res(toBlob(m.key))}catch(e){rej(e)}};
-      s.onerror=()=>rej(new Error('glb script failed'));
-      document.head.appendChild(s);
-    });
+    if(blobCache[m.key])return Promise.resolve(blobCache[m.key]);
+    if(FORCE_JS||location.protocol==='file:'||!('fetch' in window)){
+      return new Promise((res,rej)=>{
+        const s=document.createElement('script');
+        s.src='models/js/'+m.key+'.js';
+        s.onload=()=>{try{res(toBlob(m.key))}catch(e){rej(e)}};
+        s.onerror=()=>rej(new Error('glb script failed'));
+        document.head.appendChild(s);
+      });
+    }
+    /* same delivery as the old working build: model-viewer receives a Blob URL,
+       but bytes now come from the small external .glb file instead of the page */
+    return fetch(m.src+'?v=7')
+      .then(r=>{if(!r.ok)throw new Error('glb http '+r.status);return r.arrayBuffer()})
+      .then(buf=>{
+        if(blobCache[m.key])return blobCache[m.key];
+        const url=URL.createObjectURL(new Blob([buf],{type:'model/gltf-binary'}));
+        blobCache[m.key]=url;lastBlob=url;return url;
+      })
+      .catch(()=>m.src+'?v=7'); /* last resort: direct URL */
   }
   function apply(i){
     cur=(i+MODELS.length)%MODELS.length;
@@ -426,13 +479,13 @@ $('#shop-back').addEventListener('click',function(){closeShop()});
     const f=$('#mv-fallback');
     if(f){f.style.display='';f.querySelector('span').textContent='حصلت مشكلة في تحميل الموديل — جرّب تحديث الصفحة'}
   });
-  if(!('IntersectionObserver' in window)){apply(0);}
-    else{const __mvEl=document.querySelector('#mv-main');
-      const __mvSec=__mvEl&&( __mvEl.closest('section')||__mvEl );
-      const __mvIO=new IntersectionObserver(function(es){
-        if(es.some(function(e){return e.isIntersecting})){__mvIO.disconnect();apply(0)}
-      },{rootMargin:'700px 0px'});
-      if(__mvSec)__mvIO.observe(__mvSec);else apply(0);}
+  /* init immediately like the old build — the first GLB (~463KB) downloads in the
+     background while the loading screen plays, so the model is ready when scrolled to */
+  apply(0);
+  /* preload the remaining models once idle -> chip switching is instant */
+  const __preGLB=function(){MODELS.forEach(function(m){glbUrl(m).catch(function(){})})};
+  if('requestIdleCallback' in window)requestIdleCallback(__preGLB,{timeout:8000});
+  else setTimeout(__preGLB,3500);
   const hideFb=()=>{if(fallback)fallback.style.display='none'};
   if(window.customElements){
     if(customElements.get('model-viewer'))hideFb();
@@ -709,7 +762,7 @@ if(location.hash.length>1){
     if(el){const top=clamp(el.getBoundingClientRect().top+scrollY-70,0,maxY());
       try{scrollTo({top,behavior:'auto'})}catch(err){scrollTo(0,top)}}
   };
-  setTimeout(goDeep,reduceMotion?60:150);
+  setTimeout(goDeep,reduceMotion?60:2850);
 }
 
 
