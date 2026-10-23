@@ -54,7 +54,7 @@ const revObs=new IntersectionObserver(es=>{
     const el=en.target,d=+(el.dataset.delay||0);
     el.style.transitionDelay=d+'ms';
     el.classList.add('in');
-    setTimeout(()=>{el.style.transitionDelay='0ms'},d+700);
+    setTimeout(()=>{el.style.transitionDelay='0ms'},d+950);
     revObs.unobserve(el);
   })
 },{threshold:.1,rootMargin:'0px 0px -2% 0px'});
@@ -423,7 +423,7 @@ $('#shop-back').addEventListener('click',function(){closeShop()});
     const cp=catalog.find(function(c){return c.name===pn});
     if(cp&&cp.opts){openModal(catalog.indexOf(cp));return}
     addToCart({name:pn,n:cp?cp.n:0,img:cp?cp.img:'',art:cp?cp.art:m.art});
-    flyToCart($('#mv-add'));morphAdded($('#mv-add'));
+    flyToCart($('#mv-add'),cp?cp.img:null);morphAdded($('#mv-add'));
     toastShow(pn+' — اتضاف للسلة');
   });
   document.addEventListener('keydown',e=>{
@@ -579,6 +579,7 @@ function addToCart(item,qty){
   const found=cartArr.find(it=>it.name===item.name);
   if(found)found.qty+=q;else cartArr.push({name:item.name,n:item.n,img:item.img||'',art:item.art||'',qty:q});
   renderCart();
+  if(nav)nav.classList.remove('hide'); /* السلة قدام العميل — الناف بار يرجع فورًا بعد الإضافة */
 }
 function renderCart(){
   const cnt=cartCount();
@@ -588,7 +589,7 @@ function renderCart(){
   drawer.classList.toggle('empty',!cnt);
   cdItems.innerHTML=cartArr.map((it,k)=>{
     return `<div class="cd-item">
-      <div class="cd-thumb">${it.img&&!it.img.startsWith('img/')?`<img src="${it.img}" alt="">`:ART[it.art]||''}</div>
+      <div class="cd-thumb">${it.img?`<img src="${it.img}" alt="" loading="lazy" decoding="async">`:ART[it.art]||''}</div>
       <div class="cd-info">
         <b>${it.name}</b>
         <span>${arInt(it.n*it.qty)} ج.م</span>
@@ -638,8 +639,8 @@ cdItems.addEventListener('click',e=>{
   const add=e.target.closest('[data-add]');
   if(add){const p=catalog[+add.dataset.add];
     if(p.opts){const k=(cardSel[+add.dataset.add]!=null)?cardSel[+add.dataset.add]:defOpt(p),o=p.opts[k],an=p.name+' - '+o.k;
-      addToCart({name:an,n:o.n,img:p.img,art:p.art});flyToCart(add);morphAdded(add);toastShow(an+' — اتضاف للسلة');return}
-    addToCart({name:p.name,n:p.n,img:p.img,art:p.art});flyToCart(add);morphAdded(add);toastShow(p.name+' — اتضاف للسلة');return}
+      addToCart({name:an,n:o.n,img:p.img,art:p.art});flyToCart(tileOf(add),p.img);morphAdded(add);toastShow(an+' — اتضاف للسلة');return}
+    addToCart({name:p.name,n:p.n,img:p.img,art:p.art});flyToCart(tileOf(add),p.img);morphAdded(add);toastShow(p.name+' — اتضاف للسلة');return}
   const cardEl=e.target.closest('.p-card');
   if(cardEl){openModal(+cardEl.dataset.idx);return}
 });});
@@ -717,7 +718,7 @@ $('#pm-add').addEventListener('click',()=>{
   var v=(pmItem.opts&&pmItem.opts.length)?pmItem.opts[pmOpt]:null;
   var an=v?pmItem.name+' - '+v.k:pmItem.name;
   addToCart({name:an,n:v?v.n:pmItem.n,img:pmItem.img,art:pmItem.art},pmQty);
-  flyToCart($('#pm-add'));morphAdded($('#pm-add'));
+  flyToCart($('#pm-photo'),pmItem.img);morphAdded($('#pm-add'));
   toastShow(an+' — اتضاف للسلة ('+arInt(pmQty)+')');
   setTimeout(closeModal,450);
 });
@@ -841,20 +842,58 @@ document.addEventListener('click',e=>{
   b.appendChild(s);setTimeout(()=>s.remove(),720);
 });
 
-/* ---------- FLY-TO-CART orb ---------- */
-function flyToCart(from){
+/* ---------- FLY-TO-CART: the actual product photo flies into the cart ---------- */
+function tileOf(add){const c=add.closest('.p-card');return (c&&c.querySelector('.p-tile'))||add}
+function flyToCart(from,img){
   const tgt=$('#cart-btn');
-  if(!from||!tgt)return;
+  if(!from||!tgt||reduceMotion)return;
   const a=from.getBoundingClientRect(),b=tgt.getBoundingClientRect();
   if(!a.width||!b.width)return;
-  const o=document.createElement('span');o.className='fly-orb';
-  o.style.left=(a.left+a.width/2-9)+'px';o.style.top=(a.top+a.height/2-9)+'px';
-  document.body.appendChild(o);
-  requestAnimationFrame(()=>{requestAnimationFrame(()=>{
-    o.style.left=(b.left+b.width/2-9)+'px';o.style.top=(b.top+b.height/2-9)+'px';
-    o.style.transform='scale(.3)';o.style.opacity='.15';
-  })});
-  setTimeout(()=>o.remove(),850);
+  const sx=a.left+a.width/2,sy=a.top+a.height/2;
+  const dx=(b.left+b.width/2)-sx,dy=(b.top+b.height/2)-sy;
+  const fly=!!img&&/^(data:image|img\/)/.test(img);
+  const node=document.createElement('span');
+  node.className=fly?'fly-img':'fly-orb';
+  if(fly)node.innerHTML='<img src="'+img+'" alt="">';
+  node.style.left=(sx-(fly?34:9))+'px';node.style.top=(sy-(fly?34:9))+'px';
+  document.body.appendChild(node);
+  if(node.animate){
+    node.animate([
+      {transform:'translate(0,0) scale(1) rotate(0deg)',opacity:1},
+      {transform:'translate('+(dx*.5)+'px,'+(dy*.5-90)+'px) scale(.7) rotate('+(dx>0?-12:12)+'deg)',opacity:.95,offset:.55},
+      {transform:'translate('+dx+'px,'+dy+'px) scale(.16) rotate('+(dx>0?-24:24)+'deg)',opacity:.3}
+    ],{duration:820,easing:'cubic-bezier(.3,.08,.32,1)',fill:'forwards'});
+  }else{
+    node.style.transition='top .75s cubic-bezier(.3,-.25,.65,1),left .75s cubic-bezier(.55,.05,.85,.5),transform .75s,opacity .75s';
+    requestAnimationFrame(()=>{requestAnimationFrame(()=>{
+      node.style.left=(b.left+b.width/2-9)+'px';node.style.top=(b.top+b.height/2-9)+'px';
+      node.style.transform='scale(.3)';node.style.opacity='.15';
+    })});
+  }
+  setTimeout(function(){
+    node.remove();
+    tgt.classList.remove('bump');void tgt.offsetWidth;tgt.classList.add('bump');
+  },fly?840:860);
+  sparkBurst(sx,sy);
+}
+/* gold sparkle burst at the add moment */
+function sparkBurst(x,y){
+  if(reduceMotion)return;
+  const cols=['#c49a3a','#e6c87d','#9c7620','#c96f4a'];
+  for(let i=0;i<7;i++){
+    const s=document.createElement('span');s.className='spark';
+    const ang=Math.PI*2*(i/7)+Math.random()*.8,dist=26+Math.random()*32;
+    s.style.left=x+'px';s.style.top=y+'px';
+    s.style.background=cols[i%4];
+    document.body.appendChild(s);
+    if(s.animate){
+      s.animate([
+        {transform:'translate(-50%,-50%) scale(1)',opacity:1},
+        {transform:'translate(calc(-50% + '+(Math.cos(ang)*dist).toFixed(1)+'px),calc(-50% + '+(Math.sin(ang)*dist-14).toFixed(1)+'px)) scale(.15)',opacity:0}
+      ],{duration:520+Math.random()*260,easing:'cubic-bezier(.2,.7,.3,1)',fill:'forwards'});
+    }
+    setTimeout(()=>s.remove(),860);
+  }
 }
 
 /* ---------- SCROLL LOOP: progress bar + parallax + watermark + to-top + nav ---------- */
@@ -874,6 +913,7 @@ addEventListener('resize',()=>{cachePar()});
 addEventListener('load',cachePar);
 setTimeout(cachePar,1200);
 const stMark=$('#st-mark'),stSec=$('.statement');
+let lastYY=scrollY,downRun=0,lastHideT=0,lastScrollT=0;
 function raf(){
   const y=scrollY,vh=innerHeight;
   const max=document.documentElement.scrollHeight-vh;
@@ -881,6 +921,15 @@ function raf(){
   ttCircle.style.strokeDashoffset=String(1-clamp(y/Math.max(1,max),0,1));
   toTop.classList.toggle('show',y>650);
   navActive();
+  const navBusy=document.body.classList.contains('menu-open')||document.body.classList.contains('cart-open')||
+                document.body.classList.contains('pm-open')||document.body.classList.contains('shop-open');
+  if(navPin||navBusy||y<lastYY-4||y<=160){nav.classList.remove('hide');downRun=0}
+  else if(y>lastYY+4&&y>460){downRun++;if(downRun>=2){nav.classList.add('hide');lastHideT=performance.now()}}
+  else downRun=0;
+  /* smart auto-return: page idle (no scrolling) for 450ms → the nav slides back in */
+  if(nav.classList.contains('hide')&&!navPin&&!navBusy&&performance.now()-lastScrollT>450&&performance.now()-lastHideT>600)
+    nav.classList.remove('hide');
+  lastYY=y;
   const vc=y+vh/2;
   for(const o of parEls){
     const off=clamp((o.base-vc)*o.sp*-1,-60,60);
@@ -896,6 +945,10 @@ function raf(){
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
+/* pointer near the top = the user wants the nav — pin it (also during smooth scrolls) */
+let navPin=false;
+addEventListener('pointermove',function(e){navPin=e.clientY<130;if(navPin)nav.classList.remove('hide')},{passive:true});
+addEventListener('scroll',function(){lastScrollT=performance.now()},{passive:true});
 toTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'}));
 
 /* ---------- GOLD BAND: duplicate content for seamless loop ---------- */
