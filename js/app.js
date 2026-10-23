@@ -682,6 +682,8 @@ function updatePM(){
 function closeModal(fromPop){
   document.body.classList.remove('pm-open');
   document.documentElement.classList.remove('lock');
+  if(pmEl)pmEl.classList.remove('soon');
+  pmSoon=null;
   if(pmFromPop){pmFromPop=false;if(!fromPop)history.back()}
 }
 $('#pm-close').addEventListener('click',closeModal);
@@ -692,7 +694,7 @@ document.addEventListener('keydown',e=>{
 $('#pm-plus').addEventListener('click',()=>{pmQty=clamp(pmQty+1,1,99);$('#pm-qty').textContent=arInt(pmQty);updatePM()});
 $('#pm-minus').addEventListener('click',()=>{pmQty=clamp(pmQty-1,1,99);$('#pm-qty').textContent=arInt(pmQty);updatePM()});
 $('#pm-opts').addEventListener('click',function(e){
-  var b=e.target.closest('.pm-opt');if(!b||!pmItem||!pmItem.opts)return;
+  var b=e.target.closest('.pm-opt');if(!b||pmSoon!=null||!pmItem||!pmItem.opts)return;
   pmOpt=+b.dataset.o;
   $$('#pm-opts .pm-opt').forEach(function(el,k){el.classList.toggle('on',k===pmOpt)});
   updatePM();
@@ -706,6 +708,62 @@ $('#pm-add').addEventListener('click',()=>{
   toastShow(an+' — اتضاف للسلة ('+arInt(pmQty)+')');
   setTimeout(closeModal,450);
 });
+
+/* ---------- COMING SOON MODAL (3 cards: سكاكين / ARSHIA PLUS / ترمسات) ---------- */
+const SOON3=[
+ {name:'أطقم سكاكين على حامل',cat:'أطقم سكاكين',
+  foot:'كلهم أطقم سكاكين على حامل وأصليين — بيوصلوا قريب جدًا لمتجر أوانيستا.',
+  opts:[
+   {k:'طقم Bass',img:'img/i085.webp',d:'سكاكين استانلس على حامل دائري بعلامة Bass — ملمس فاخر وثبات عالي.'},
+   {k:'طقم ARSHIA',img:'img/i086.webp',d:'سكاكين استانلس على حامل دوار بعلامة ARSHIA الأصلية.'},
+   {k:'طقم البركة — أسود وروز جولد',img:'img/i087.webp',d:'٩ قطعة على حامل أكريليك — أسود وروز جولد من شركة البركة.'}]},
+ {name:'أطقم حلل ومقالي ARSHIA PLUS',cat:'أطقم حلل ومقالي',
+  foot:'نفس الموديل بالظبط — الفرق في اللون بس. بيوصل قريب جدًا لمتجر أوانيستا.',
+  opts:[
+   {k:'اللون الأسود',img:'img/i088.webp',d:'طقم حلل ومقالي ARSHIA PLUS بتشطيب مطروق — اللون الأسود.'},
+   {k:'اللون الأخضر',img:'img/i089.webp',d:'نفس موديل الأسود بالظبط — باللون الأخضر.'}]},
+ {name:'ترمسات EL ANDALOS GROUP',cat:'ترمسات',
+  foot:'كلها نفس الماركة ونفس الستايل المضلع بالذهبي — بتوصل قريب جدًا لمتجر أوانيستا.',
+  opts:[
+   {k:'الأسود',img:'img/i090.webp',d:'ستايل مضلع بلمسات دهبي وحلزون مبهرة — اللون الأسود.'},
+   {k:'البيج الفاتح (كريمي)',img:'img/i091.webp',d:'حلق دهبي ومقبض دهبي لامع — اللون الكريمي الفاتح.'},
+   {k:'البيج الغامق',img:'img/i092.webp',d:'نفس الستايل المضلع باللمسات الدهبية — اللون البيج الغامق.'},
+   {k:'الكريمي الطويل',img:'img/i093.webp',d:'موديل طويل مضلع بمقبض دهبي محزز — اللون الكريمي.'},
+   {k:'البيج الوردي الطويل',img:'img/i094.webp',d:'موديل طويل مضلع بمقبض دهبي محزز — اللون البيج الوردي.'}]}
+];
+let pmSoon=null,pmSoonOpt=0;
+function soonDesc(){
+  const s=SOON3[pmSoon],o=s.opts[pmSoonOpt];
+  $('#pm-desc').innerHTML='<div class="fi">'+o.d+'</div><div class="fi">'+s.foot+'</div>';
+}
+function openSoon(j){
+  pmSoon=j;pmSoonOpt=0;const s=SOON3[j];
+  pmEl.classList.add('soon');
+  $('#pm-cat').textContent=s.cat;
+  $('#pm-name').textContent=s.name;
+  $('#pm-opts').innerHTML=s.opts.map(function(o,k){return '<button class="pm-opt '+(k?'':'on')+'" data-o="'+k+'">'+o.k+'</button>'}).join('');
+  $('#pm-opts').style.display='flex';
+  $('#pm-photo').innerHTML='<img id="pm-img" src="'+s.opts[0].img+'" loading="lazy" decoding="async" alt="'+s.name+'">';
+  $('#pm-thumbs').innerHTML='';
+  soonDesc();
+  document.body.classList.add('pm-open');
+  document.documentElement.classList.add('lock');
+  history.pushState({pm:1},'');pmFromPop=false;
+}
+$('#pm-opts').addEventListener('click',function(e){
+  if(pmSoon==null)return;
+  const b=e.target.closest('.pm-opt');if(!b)return;
+  pmSoonOpt=+b.dataset.o;
+  $$('#pm-opts .pm-opt').forEach(function(el,k){el.classList.toggle('on',k===pmSoonOpt)});
+  const im=$('#pm-img');
+  if(im){im.style.opacity=0;setTimeout(function(){im.src=SOON3[pmSoon].opts[pmSoonOpt].img;im.style.opacity=1},170)}
+  soonDesc();
+});
+$('#soon-grid').addEventListener('click',function(e){
+  const c=e.target.closest('.s-card');if(c)openSoon(+c.dataset.soon)});
+$('#soon-grid').addEventListener('keydown',function(e){
+  const c=e.target.closest('.s-card');
+  if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openSoon(+c.dataset.soon)}});
 
 /* back button closes overlays */
 addEventListener('popstate',function(){

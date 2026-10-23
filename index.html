@@ -416,7 +416,15 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
 .s-note{color:var(--mut);font-weight:600;font-size:.85rem;line-height:1.6;margin-top:6px}
 .s-soonbar{margin-top:auto;padding-top:13px;display:flex;align-items:center;gap:8px;color:var(--gold);font-weight:800;font-size:.88rem}
 .s-soonbar svg{width:16px;height:16px;flex:none}
-#soon-grid .s-card:last-child:nth-child(3n+1){grid-column:2}
+.s-card{cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s ease,border-color .3s ease}
+.s-card:hover{transform:translateY(-4px);border-color:rgba(156,118,32,.45);box-shadow:0 18px 38px -18px rgba(156,118,32,.35)}
+.s-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.pm-soon{display:none;align-items:center;justify-content:center;gap:9px;margin-top:18px;padding:12px 16px;
+  border:2px dashed rgba(156,118,32,.45);border-radius:14px;color:var(--gold-deep);font-weight:800;font-size:.92rem;background:rgba(156,118,32,.06)}
+.pm-soon svg{width:17px;height:17px;flex:none}
+.pmodal.soon .pm-soon{display:flex}
+.pmodal.soon .pm-rate,.pmodal.soon .pm-prices,.pmodal.soon .pm-qtyrow,.pmodal.soon .pm-addbtn,
+.pmodal.soon .pm-thumbs,.pmodal.soon .pm-body>.pm-note{display:none}
 @media (max-width:560px){
   .s-card{border-radius:16px}
   .s-tile .p-img{padding:8px}
@@ -858,6 +866,7 @@ body.shop-open .shop-back{animation:shopBackIn .5s var(--ease) both}
     <h3 id="pm-name"></h3>
     <div class="pm-rate" id="pm-rate"></div>
     <div class="pm-opts" id="pm-opts"></div>
+    <div class="pm-soon" id="pm-soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>قريبًا على أوانيستا — منتج ده هيبقى متاح للطلب قريب جدًا</span></div>
     <p class="pm-desc" id="pm-desc"></p>
     <div class="pm-prices"><b id="pm-price"></b><s id="pm-old"></s></div>
     <div class="pm-qtyrow">
@@ -1017,124 +1026,40 @@ body.shop-open .shop-back{animation:shopBackIn .5s var(--ease) both}
       <p class="sec-sub" data-rv data-delay="120">منتجات أصلية جديدة بتوصل لمتجرنا قريب — شوفها من دلوقتي وهتلاقيها هنا أول ما تنزل.</p>
     </div>
     <div class="p-grid" id="soon-grid">
-      <article class="s-card" data-rv data-delay="0">
+      <article class="s-card" data-soon="0" data-rv data-delay="0" role="button" tabindex="0" aria-label="شوف تفاصيل أطقم سكاكين على حامل">
         <div class="s-tile">
           <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i085.webp" loading="lazy" decoding="async" alt="طقم سكاكين Bass">
+          <img class="p-img" src="img/i085.webp" loading="lazy" decoding="async" alt="أطقم سكاكين على حامل">
         </div>
         <div class="s-body">
           <div class="p-cat">أطقم سكاكين</div>
-          <h3 class="p-name">طقم سكاكين Bass</h3>
-          <p class="s-note">سكاكين استانلس على حامل دائري بعلامة Bass — العدد والمواصفات أول ما يوصل.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
+          <h3 class="p-name">أطقم سكاكين على حامل</h3>
+          <p class="s-note">٣ ماركات أصلية — Bass وARSHIA والبركة، كلهم على حامل.</p>
+          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الألوان والموديلات</span></div>
         </div>
       </article>
-      <article class="s-card" data-rv data-delay="60">
+      <article class="s-card" data-soon="1" data-rv data-delay="60" role="button" tabindex="0" aria-label="شوف تفاصيل أطقم حلل ومقالي ARSHIA PLUS">
         <div class="s-tile">
           <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i086.webp" loading="lazy" decoding="async" alt="طقم سكاكين ARSHIA">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">أطقم سكاكين</div>
-          <h3 class="p-name">طقم سكاكين ARSHIA</h3>
-          <p class="s-note">سكاكين استانلس على حامل دوار بعلامة ARSHIA الأصلية — العدد والمواصفات أول ما يوصل.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="120">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i087.webp" loading="lazy" decoding="async" alt="طقم سكاكين البركة — أسود وروز جولد">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">أطقم سكاكين</div>
-          <h3 class="p-name">طقم سكاكين البركة — أسود وروز جولد</h3>
-          <p class="s-note">٩ قطعة على حامل أكريليك — أسود وروز جولد من شركة البركة.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="0">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i088.webp" loading="lazy" decoding="async" alt="طقم ARSHIA PLUS أسود">
+          <img class="p-img" src="img/i088.webp" loading="lazy" decoding="async" alt="أطقم حلل ومقالي ARSHIA PLUS">
         </div>
         <div class="s-body">
           <div class="p-cat">أطقم حلل ومقالي</div>
-          <h3 class="p-name">طقم ARSHIA PLUS أسود</h3>
-          <p class="s-note">طقم حلل ومقالي بتشطيب مطروق — اللون الأسود، من ARSHIA PLUS.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
+          <h3 class="p-name">أطقم حلل ومقالي ARSHIA PLUS</h3>
+          <p class="s-note">نفس الموديل بالظبط متوفر بلونين — أسود وأخضر.</p>
+          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الألوان والموديلات</span></div>
         </div>
       </article>
-      <article class="s-card" data-rv data-delay="60">
+      <article class="s-card" data-soon="2" data-rv data-delay="120" role="button" tabindex="0" aria-label="شوف تفاصيل ترمسات EL ANDALOS GROUP">
         <div class="s-tile">
           <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i089.webp" loading="lazy" decoding="async" alt="طقم ARSHIA PLUS أخضر">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">أطقم حلل ومقالي</div>
-          <h3 class="p-name">طقم ARSHIA PLUS أخضر</h3>
-          <p class="s-note">نفس موديل الأسود بالظبط — باللون الأخضر، من ARSHIA PLUS.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="120">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i090.webp" loading="lazy" decoding="async" alt="الترمس الأسود — EL ANDALOS">
+          <img class="p-img" src="img/i091.webp" loading="lazy" decoding="async" alt="ترمسات EL ANDALOS GROUP">
         </div>
         <div class="s-body">
           <div class="p-cat">ترمسات</div>
-          <h3 class="p-name">الترمس الأسود — EL ANDALOS</h3>
-          <p class="s-note">ستايل مضلع بلمسات دهبي وحلزون مبهرة — حافظ للحرارة، من EL ANDALOS GROUP.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="0">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i091.webp" loading="lazy" decoding="async" alt="الترمس البيج الفاتح (كريمي) — EL ANDALOS">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">ترمسات</div>
-          <h3 class="p-name">الترمس البيج الفاتح (كريمي) — EL ANDALOS</h3>
-          <p class="s-note">ستايل مضلع بحلق دهبي ومقبض دهبي لامع — اللون الكريمي الفاتح.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="60">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i092.webp" loading="lazy" decoding="async" alt="الترمس البيج الغامق — EL ANDALOS">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">ترمسات</div>
-          <h3 class="p-name">الترمس البيج الغامق — EL ANDALOS</h3>
-          <p class="s-note">نفس الستايل المضلع باللمسات الدهبية — باللون البيج الغامق.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="120">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i093.webp" loading="lazy" decoding="async" alt="الترمس الكريمي الطويل — EL ANDALOS">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">ترمسات</div>
-          <h3 class="p-name">الترمس الكريمي الطويل — EL ANDALOS</h3>
-          <p class="s-note">موديل طويل مضلع بمقبض دهبي محزز — اللون الكريمي.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-rv data-delay="0">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i094.webp" loading="lazy" decoding="async" alt="الترمس البيج الوردي الطويل — EL ANDALOS">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">ترمسات</div>
-          <h3 class="p-name">الترمس البيج الوردي الطويل — EL ANDALOS</h3>
-          <p class="s-note">موديل طويل مضلع بمقبض دهبي محزز — اللون البيج الوردي.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>مستنيينه قريب</span></div>
+          <h3 class="p-name">ترمسات EL ANDALOS GROUP</h3>
+          <p class="s-note">٥ ألوان — ستايل مضلع بلمسات دهبي وحافظ للحرارة.</p>
+          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الألوان والموديلات</span></div>
         </div>
       </article>
     </div>
