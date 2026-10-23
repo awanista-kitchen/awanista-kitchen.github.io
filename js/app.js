@@ -957,11 +957,11 @@ toTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduceMotion?'auto':
   if(bi)bi.innerHTML+=bi.innerHTML;
 })();
 
-/* ---------- OFFER COUNTDOWN (rolling 48h) ---------- */
+/* ---------- OFFER COUNTDOWN (لفترة محدودة — fixed end 12/1 2026) ---------- */
 (function(){
   const d=$('#cd-d'),h=$('#cd-h'),m=$('#cd-m'),s=$('#cd-s');
   if(!d)return;
-  const end=new Date();end.setDate(end.getDate()+2);end.setHours(23,59,59,999);
+  const end=new Date(2026,11,1,23,59,59,999); // العرض بينتهي 12/1 2026 (1 ديسمبر 2026)
   function tick(){
     const ms=Math.max(0,end-new Date());
     d.textContent=arInt(Math.floor(ms/864e5));

@@ -486,6 +486,12 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
 .f-icon svg{width:25px;height:25px}
 .f-card h3{font-family:var(--font-d);font-weight:700;font-size:1.12rem;margin-bottom:7px}
 .f-card p{color:var(--mut);font-size:.9rem}
+.f-lim{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;margin-inline-start:8px;vertical-align:middle;
+  font-family:var(--font-b);font-size:.68rem;font-weight:800;letter-spacing:.2px;color:var(--red);
+  background:rgba(194,84,80,.09);border:1px solid rgba(194,84,80,.3)}
+.f-lim::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);animation:limPulse 1.6s ease-in-out infinite}
+@keyframes limPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.72)}}
+html[data-theme="dark"] .f-lim{background:rgba(194,84,80,.17);color:#e2908c;border-color:rgba(194,84,80,.42)}
 .features .chip::before{background:var(--teal)}
 
 /* ============ STATS ============ */
@@ -540,6 +546,11 @@ html[data-theme="dark"] .cta .chip{background:rgba(255,255,255,.06)}
 .c-box:nth-of-type(3) b{color:var(--olive)}
 .c-box:nth-of-type(4) b{color:var(--gold)}
 .c-box span{font-size:.76rem;color:var(--mut);font-weight:700}
+.cta .count-end{display:flex;align-items:center;justify-content:center;gap:7px;max-width:none;margin-top:16px;
+  font-size:.92rem;font-weight:700;color:var(--mut)}
+.cta .count-end svg{width:16px;height:16px;color:var(--red);flex:none}
+.cta .count-end b{color:var(--red);direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+html[data-theme="dark"] .cta .count-end b{color:#e2908c}
 .wa-btn{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:13px 24px;border-radius:99px;
   background:#1faa53;color:#fff;font-weight:800;font-size:.95rem;text-decoration:none;
   box-shadow:0 12px 26px -12px rgba(31,170,83,.65);transition:transform .3s var(--ease),box-shadow .3s}
@@ -1176,6 +1187,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
 
 <div class="band" aria-hidden="true">
   <div class="band-in" id="band-in">
+    <span>لفترة محدودة · بينتهي 12/1 2026</span><i>✦</i>
     <span>خصم لحد ٢٥٪</span><i>✦</i>
     <span>جودة تدوم سنين</span><i>✦</i>
     <span>شحن لكل محافظات مصر</span><i>✦</i>
@@ -1398,7 +1410,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
     <div class="f-grid">
       <div class="f-card" data-rv="right">
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="14" height="12" rx="2"/><path d="M15.5 9h3.5l3 3.5V17h-6.5z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
-        <h3>شحن سريع ومجاني</h3>
+        <h3>شحن سريع ومجاني <span class="f-lim">لفترة محدودة</span></h3>
         <p>توصيل خلال ٤٨ ساعة لكل المحافظات، ومجاني على الطلبات فوق ٢٠٠ ج.م.</p>
       </div>
       <div class="f-card" data-rv="left" data-delay="60">
@@ -1473,13 +1485,14 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
   <div class="container">
     <span class="chip" data-rv="pop">لفترة محدودة</span>
     <h2 data-rv data-delay="60">جهّز مطبخك <em>النهارده</em></h2>
-    <p data-rv data-delay="120">وفّر لحد ٣٠٪ على التشكيلة الجديدة + شحن مجاني لكل الطلبات الأسبوع ده.</p>
+    <p data-rv data-delay="120">وفّر لحد ٣٠٪ على التشكيلة الجديدة + شحن مجاني على كل الطلبات لفترة محدودة.</p>
     <div class="count" data-rv data-delay="150">
       <div class="c-box"><b id="cd-d">٠</b><span>يوم</span></div>
       <div class="c-box"><b id="cd-h">٠</b><span>ساعة</span></div>
       <div class="c-box"><b id="cd-m">٠</b><span>دقيقة</span></div>
       <div class="c-box"><b id="cd-s">٠</b><span>ثانية</span></div>
     </div>
+    <p class="count-end" data-rv data-delay="170"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>العرض بينتهي <b>12/1 2026</b></p>
     <a href="#store" class="btn btn-terra" data-rv data-delay="180">
       تسوّق التشكيلة دلوقتي
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
