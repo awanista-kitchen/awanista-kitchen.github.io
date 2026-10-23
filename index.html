@@ -929,6 +929,13 @@ html[data-theme="dark"] .p-price,html[data-theme="dark"] .pm-prices b{background
 [data-rv="flip"]{transform:perspective(900px) rotateX(14deg) translateY(30px);transform-origin:50% 100%}
 [data-rv].in{opacity:1;transform:none;clip-path:inset(-8% -6% -14% -6%)}
 [data-rv="blur"].in,[data-rv="zoom"].in,[data-rv="flip"].in{filter:none}
+/* mobile: never slide from the sides — horizontal pre-reveal transforms blow the layout width */
+@media (max-width:760px){
+  [data-rv="right"],[data-rv="left"]{transform:translateY(26px)}
+}
+/* hard guard: the page must never be wider than the phone */
+html{overflow-x:clip}
+@supports not (overflow-x:clip){html,body{overflow-x:hidden}}
 @media (prefers-reduced-motion:reduce){
   [data-rv]{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important;transition:none!important}
 }
