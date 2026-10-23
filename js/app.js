@@ -137,7 +137,7 @@ const products=[
   cat:'إكسسوارات', name:'طقم كنك قهوة تركي - 3 قطع مع حامل',
   price:'٧٤٩', n:749, old:'٩٩٩', rate:'4.8', revs:151, tag:'خصم 25٪', otag:'خامات',
   opts:[{k:'جرانيت',n:974,old:1299},{k:'استانلس',n:749,old:999}],
-  desc:'استمتعي بتحضير القهوة التركية بأناقة مع طقم الكنك 3 قطع مع حامل — متوفر بخامتين تختار بينهم: جرانيت أو استانلس ستيل، بتصميم عصري وجودة عالية تجمع بين العملية والشكل الراقي.\nالمميزات:\nمتوفر بخامتين: جرانيت عالي الجودة أو استانلس ستيل — اختار اللي يناسبك من الأزرار.\n3 مقاسات مختلفة تناسب جميع احتياجاتك.\nتوزيع متساوٍ للحرارة لتحضير قهوة غنية بالمذاق.\nيد مريحة وعازلة للحرارة لسهولة الاستخدام.\nسهل التنظيف ومناسب للاستخدام اليومي.\nحامل معدني أنيق يحافظ على ترتيب الكنك ويضيف لمسة مميزة للمطبخ.\nمناسب لتحضير القهوة التركية، الحليب، والنسكافيه والمشروبات الساخنة.\nمحتويات الطقم: 3 كنك + حامل معدني.\nالأسعار: جرانيت ٩٧٤ ج.م بدل ١٢٩٩ — استانلس ٧٤٩ ج.م بدل ٩٩٩.\nاختار الخامة المناسبة من الأزرار اللي فوق قبل ما تضيفه للسلة.\nمتوفر الآن بكميات محدودة، اطلبه قبل نفاد المخزون.'},
+  desc:'استمتعي بتحضير القهوة التركية بأناقة مع طقم الكنك 3 قطع مع حامل — متوفر بخامتين تختار بينهم: جرانيت أو استانلس ستيل، بتصميم عصري وجودة عالية تجمع بين العملية والشكل الراقي.\nالمميزات:\nمتوفر بخامتين: جرانيت عالي الجودة أو استانلس ستيل — اختار اللي يناسبك من الأزرار.\n3 مقاسات مختلفة تناسب جميع احتياجاتك.\nتوزيع متساوٍ للحرارة لتحضير قهوة غنية بالمذاق.\nيد مريحة وعازلة للحرارة لسهولة الاستخدام.\nسهل التنظيف ومناسب للاستخدام اليومي.\nحامل معدني أنيق يحافظ على ترتيب الكنك ويضيف لمسة مميزة للمطبخ.\nمناسب لتحضير القهوة التركية، الحليب، والنسكافيه والمشروبات الساخنة.\nمحتويات الطقم: 3 كنك + حامل معدني.\nالخامات المتاحة: جرانيت واستانلس ستيل — اختار الخامة من أزرار الخامات قبل ما تضيفه للسلة.\nمتوفر الآن بكميات محدودة، اطلبه قبل نفاد المخزون.'},
  {img:'img/i004.webp', imgs:['img/i004.webp','img/i028.webp','img/i029.webp'],
   cat:'مقالي', name:'طقم مقالي جرانيت تركي 3 قطع Martev (20/24/28)',
   price:'١٣٤٩', n:1349, old:'١٧٩٩', rate:'4.8', revs:74, tag:'وصل حديثًا', model:'models/frying-pan.glb',
@@ -150,7 +150,7 @@ const products=[
   cat:'أواني', name:'طقم حلل Evita الحداد التركي الأصلي',
   price:'٥٦٢٤', n:5624, old:'٧٤٩٩', rate:'4.9', revs:154, tag:'الأكثر مبيعًا',
   opts:[{k:'16 قطعة',n:5624,old:7499},{k:'18 قطعة',n:6374,old:8499},{k:'20 قطعة',n:7124,old:9499}],
-  desc:'استمتعي بتجربة طهي احترافية مع طقم حلل Evita الحداد التركي الأصلي، المصمم بجودة عالية ليجمع بين الأداء العملي والتصميم الأنيق، ويمنحك أفضل النتائج في كل استخدام.\nالمميزات:\nطبقة جرانيت غير لاصقة عالية الجودة تقلل استخدام الزيوت وتسهل التنظيف.\nتوزيع متساوٍ للحرارة للحصول على طهي مثالي في وقت أقل.\nخامات متينة تتحمل الاستخدام اليومي وتدوم لسنوات.\nأغطية زجاج حراري لمتابعة الطعام أثناء الطهي.\nمقابض مريحة وعازلة للحرارة لسهولة وأمان الاستخدام.\nمناسب لمعظم أنواع البوتاجازات.\nتصميم تركي عصري يضيف لمسة راقية لمطبخك.\nالمقاسات المتاحة:\n16 قطعة — ٥٦٢٤ ج.م بدل ٧٤٩٩.\n18 قطعة — ٦٣٧٤ ج.م بدل ٨٤٩٩.\n20 قطعة — ٧١٢٤ ج.م بدل ٩٤٩٩.\nاطلب الآن واختار المقاس المناسب من الأزرار اللي فوق قبل ما تضيفه للسلة.\nمتوفر الآن بكميات محدودة، اطلبه قبل نفاد المخزون.'},
+  desc:'استمتعي بتجربة طهي احترافية مع طقم حلل Evita الحداد التركي الأصلي، المصمم بجودة عالية ليجمع بين الأداء العملي والتصميم الأنيق، ويمنحك أفضل النتائج في كل استخدام.\nالمميزات:\nطبقة جرانيت غير لاصقة عالية الجودة تقلل استخدام الزيوت وتسهل التنظيف.\nتوزيع متساوٍ للحرارة للحصول على طهي مثالي في وقت أقل.\nخامات متينة تتحمل الاستخدام اليومي وتدوم لسنوات.\nأغطية زجاج حراري لمتابعة الطعام أثناء الطهي.\nمقابض مريحة وعازلة للحرارة لسهولة وأمان الاستخدام.\nمناسب لمعظم أنواع البوتاجازات.\nتصميم تركي عصري يضيف لمسة راقية لمطبخك.\nالمقاسات المتاحة: 16 و18 و20 قطعة — اختار المقاس من أزرار المقاسات قبل ما تضيفه للسلة.\nمتوفر الآن بكميات محدودة، اطلبه قبل نفاد المخزون.'},
  {img:'img/i037.webp', imgs:['img/i037.webp','img/i038.webp','img/i039.webp','img/i040.webp'],
   cat:'صواني', name:'طقم صواني تقديم استانلس مستورد دهبي - 2 قطعة',
   price:'٢٢٤٩', n:2249, old:'٢٩٩٩', rate:'4.9', revs:117, tag:'فخم',
@@ -206,7 +206,12 @@ const catalog=products.map(function(p){return {img:p.img,imgs:p.imgs,desc:p.desc
 const star='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg>';
 
 /* ---------- PRODUCT CARDS (redesigned) ---------- */
+/* variant selection per catalog index (shared by store grid + featured grid) */
+const cardSel={};
+function defOpt(p){if(!p||!p.opts)return -1;var k=p.opts.findIndex(function(o){return o.n===p.n});return k>=0?k:0}
 function cardHTML(p,i){
+  const dSel=p.opts?((cardSel[i]!=null)?cardSel[i]:defOpt(p)):-1;
+  const selO=dSel>=0?p.opts[dSel]:null;
   const oldN=p.old?ar2num(p.old):0;
   const baseN=p.opts?Math.min.apply(null,p.opts.map(o=>o.n)):p.n;
   const save=oldN>baseN?Math.round((1-baseN/oldN)*100):0;
@@ -226,8 +231,9 @@ function cardHTML(p,i){
       <div class="p-cat">${p.cat}</div>
       <h3 class="p-name">${p.name}</h3>
       <div class="p-rate">${star.repeat(5)}<small>${p.rate} (${arInt(p.revs||0)} تقييم)</small></div>
+      <div class="p-opts">${p.opts?p.opts.map((o,k)=>`<button type="button" class="p-opt${k===dSel?' on':''}" data-o="${k}">${o.k}</button>`).join(''):''}</div>
       <div class="p-foot">
-        <div class="p-price">${p.opts?'من '+arInt(baseN)+' ج.م':(p.price+' ج.م')} ${p.old&&!p.opts?'<s>'+p.old+'</s>':''}</div>
+        <div class="p-price">${p.opts?(selO?arInt(selO.n)+' ج.م'+(selO.old?' <s>'+arInt(typeof selO.old==='number'?selO.old:ar2num(selO.old))+' ج.م</s>':''):'من '+arInt(baseN)+' ج.م'):(p.price+' ج.م')} ${p.old&&!p.opts?'<s>'+p.old+'</s>':''}</div>
         <div class="p-acts">
           <button class="p-eye" data-view="${i}" aria-label="شوف تفاصيل ${p.name}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg>
@@ -302,7 +308,7 @@ const priceSel=$('#price-sel'),sortSel=$('#sort-sel');
 if(priceSel)priceSel.addEventListener('change',function(){priceMode=priceSel.value;curPage=1;renderPage();});
 if(sortSel)sortSel.addEventListener('change',function(){sortMode=sortSel.value;curPage=1;renderPage();});
 renderPage();
-$('#feat-grid').innerHTML=[3,10,11].map(function(i){return cardHTML(catalog[i],i)}).join('');
+$('#feat-grid').innerHTML=[1,0,10,3].map(function(i){return cardHTML(catalog[i],i)}).join('');
 /* reveal the featured cards (grid is filled after the observer setup) */
 $$('#feat-grid .p-card').forEach(function(el){revObs.observe(el)});
 /* ---------- SHOP VIEW: المتجر شاشة مستقلة — يدخلها العميل بزر أو من الناف ---------- */
@@ -606,10 +612,21 @@ cdItems.addEventListener('click',e=>{
   }
 });
 ['#p-grid','#feat-grid'].forEach(function(sel){$(sel).addEventListener('click',function(e){
+  const opt=e.target.closest('.p-opt');
+  if(opt){e.stopPropagation();
+    const card=opt.closest('.p-card'),i=+card.dataset.idx,p=catalog[i];
+    if(p.opts){cardSel[i]=+opt.dataset.o;const o=p.opts[cardSel[i]];
+      card.querySelectorAll('.p-opt').forEach(function(b){b.classList.toggle('on',b===opt)});
+      const pe=card.querySelector('.p-price');
+      if(pe)pe.innerHTML=arInt(o.n)+' ج.م'+(o.old?' <s>'+arInt(typeof o.old==='number'?o.old:ar2num(o.old))+' ج.م</s>':'');}
+    return}
   const eye=e.target.closest('.p-eye');
   if(eye){openModal(+eye.dataset.view);return}
   const add=e.target.closest('[data-add]');
-  if(add){const p=catalog[+add.dataset.add];if(p.opts){openModal(+add.dataset.add);return}addToCart({name:p.name,n:p.n,img:p.img,art:p.art});flyToCart(add);toastShow(p.name+' — اتضاف للسلة');return}
+  if(add){const p=catalog[+add.dataset.add];
+    if(p.opts){const k=(cardSel[+add.dataset.add]!=null)?cardSel[+add.dataset.add]:defOpt(p),o=p.opts[k],an=p.name+' - '+o.k;
+      addToCart({name:an,n:o.n,img:p.img,art:p.art});flyToCart(add);toastShow(an+' — اتضاف للسلة');return}
+    addToCart({name:p.name,n:p.n,img:p.img,art:p.art});flyToCart(add);toastShow(p.name+' — اتضاف للسلة');return}
   const cardEl=e.target.closest('.p-card');
   if(cardEl){openModal(+cardEl.dataset.idx);return}
 });});
@@ -623,8 +640,8 @@ function openModal(i){
   $('#pm-name').textContent=pmItem.name;
   $('#pm-rate').innerHTML=star.repeat(5)+'<small>'+(pmItem.rate||'٤.٨')+' ('+arInt(pmItem.revs||0)+' تقييم)</small>';
   var optsEl=$('#pm-opts');
-  if(pmItem.opts&&pmItem.opts.length){pmOpt=0;
-    optsEl.innerHTML=pmItem.opts.map(function(o,k){return '<button class="pm-opt '+(k?'':'on')+'" data-o="'+k+'">'+o.k+'</button>'}).join('');
+  if(pmItem.opts&&pmItem.opts.length){pmOpt=(cardSel[i]!=null)?cardSel[i]:defOpt(pmItem);if(pmOpt<0)pmOpt=0;
+    optsEl.innerHTML=pmItem.opts.map(function(o,k){return '<button class="pm-opt '+(k===pmOpt?'on':'')+'" data-o="'+k+'">'+o.k+'</button>'}).join('');
     optsEl.style.display='flex';
   }else{optsEl.innerHTML='';optsEl.style.display='none'}
   $('#pm-desc').innerHTML=(pmItem.desc||'').split('\n').filter(function(l){return l}).map(function(l){
