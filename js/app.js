@@ -250,6 +250,15 @@ const PER=4,pGridEl=$('#p-grid'),pgNav=$('#pg-nav'),resCount=$('#res-count');
 let curPage=1,curFilter='الكل',priceMode='all',sortMode='pop';
 const cats=['الكل',...new Set(catalog.map(p=>p.cat))];
 $('#filters').innerHTML=cats.map((c,i)=>`<button class="f-chip ${i?'':'active'}" data-f="${c}">${c}</button>`).join('');
+/* fade hint on the scrollable filter row (phone): .scrolls gates the edge mask.
+   ResizeObserver re-checks when the shop view (body.shop-open) makes #filters visible */
+(function(){
+  const f=$('#filters');if(!f)return;
+  const upd=()=>f.classList.toggle('scrolls',f.scrollWidth>f.clientWidth+4);
+  upd();requestAnimationFrame(upd);
+  addEventListener('resize',upd,{passive:true});
+  if(window.ResizeObserver)new ResizeObserver(upd).observe(f);
+})();
 function viewList(){
   const v=[];
   catalog.forEach(function(p,i){

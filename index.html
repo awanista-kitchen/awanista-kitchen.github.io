@@ -389,17 +389,23 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
   .p-rate{gap:3px;margin-top:4px}
   .p-rate svg{width:11px;height:11px}
   .p-rate small{font-size:.6rem}
-  .p-foot{margin-top:auto;padding-top:7px;gap:6px}
+  .p-foot{margin-top:auto;padding-top:8px;gap:6px;flex-wrap:wrap;row-gap:9px}
   .p-opts{margin-top:6px;min-height:20px;gap:4px}
   .p-opt{font-size:.66rem;padding:3px 9px}
-  .p-price{font-size:.98rem}
+  .p-price{flex:1 1 100%;justify-content:center;font-size:.95rem}
   .p-price s{font-size:.66rem;margin-inline-start:4px}
-  .p-acts{gap:6px}
-  .add-btn,.p-eye{width:34px;height:34px;border-radius:10px}
-  .add-btn svg{width:15px;height:15px}
-  .p-eye svg{width:16px;height:16px}
+  .p-acts{width:100%;justify-content:center;gap:10px}
+  .add-btn,.p-eye{width:42px;height:42px;border-radius:11px}
+  .add-btn svg{width:17px;height:17px}
+  .p-eye svg{width:18px;height:18px}
+  .p-quick{inset-inline:8px;bottom:8px;font-size:.8rem;padding:10px 6px;gap:6px}
+  .p-quick svg{width:15px;height:15px}
   .pg-nav{gap:6px}
   .pg-btn{min-width:32px;height:36px;border-radius:10px;font-size:.86rem;padding:0 8px}
+}
+@media (max-width:370px){
+  .p-quick{font-size:.7rem;gap:4px;letter-spacing:-.2px}
+  .p-quick svg{display:none}
 }
 /* ---------- COMING SOON (قريبًا على أوانيستا) ---------- */
 .s-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:26px;overflow:hidden;display:flex;flex-direction:column}
@@ -454,6 +460,8 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
 .tool-sel select option{font-weight:700;background:var(--card);color:var(--ink)}
 @media (max-width:560px){
   .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .filters.scrolls{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26px,#000 calc(100% - 26px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 26px,#000 calc(100% - 26px),transparent 100%)}
   .filters::-webkit-scrollbar{display:none}
   .f-chip{flex:0 0 auto;padding:7px 15px;font-size:.8rem}
   .store-tools{width:100%;gap:6px}
