@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Awanista | أدوات مطبخ تليق بيك</title>
-<meta name="description" content="أوانيستا — متجرك المصري لأدوات المطبخ الاحترافية: مقالي، حلل ضغط، سكاكين، معالق، أواني وكهربائيات بجودة تدوم وبأسعار تناسب كل بيت.">
+<title>Awanista | عروض الجمعة البيضاء — أدوات مطبخ تليق بيك</title>
+<meta name="description" content="عروض الجمعة البيضاء على أوانيستا: خصومات لحد ٣٠٪ + شحن مجاني على كل المنتجات لفترة محدودة. مقالي، حلل ضغط، سكاكين، معالق، أواني وكهربائيات بجودة تدوم.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%238a6b25'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='%23f8f3ea' font-family='Arial'%3E%D8%A3%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -493,6 +493,39 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
 @keyframes limPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.72)}}
 html[data-theme="dark"] .f-lim{background:rgba(194,84,80,.17);color:#e2908c;border-color:rgba(194,84,80,.42)}
 .features .chip::before{background:var(--teal)}
+
+/* ============ WHITE FRIDAY (عروض الجمعة البيضاء) ============ */
+.wf-banner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:-4px 0 28px;padding:16px 20px;
+  border-radius:20px;border:1px solid rgba(156,118,32,.35);position:relative;overflow:hidden;
+  background:linear-gradient(120deg,rgba(196,154,58,.16),rgba(201,111,74,.12) 55%,rgba(62,137,137,.12))}
+.wf-banner::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.55) 48%,transparent 64%);
+  transform:translateX(-130%);animation:wfShine 4.8s ease-in-out infinite}
+@keyframes wfShine{0%,55%{transform:translateX(-130%)}90%,100%{transform:translateX(130%)}}
+.wf-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;flex:none;
+  background:#241b10;color:#eccd7d;font-weight:800;font-size:.9rem;box-shadow:0 10px 20px -12px rgba(36,27,16,.55)}
+.wf-pill svg{width:14px;height:14px;flex:none}
+.wf-txt{flex:1;min-width:210px;font-weight:800;color:var(--ink);font-size:1rem;line-height:1.5}
+.wf-txt small{display:block;font-weight:700;color:var(--mut);font-size:.78rem;margin-top:2px}
+.wf-end{display:inline-flex;align-items:center;gap:7px;flex:none;padding:8px 14px;border-radius:999px;
+  font-weight:800;font-size:.85rem;color:var(--red);border:1px dashed rgba(194,84,80,.5);background:rgba(194,84,80,.06)}
+.wf-end svg{width:14px;height:14px;flex:none}
+.wf-end b{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.wf-peek{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;padding:14px 18px;border-radius:16px;
+  border:1px dashed rgba(156,118,32,.42);background:rgba(156,118,32,.06);font-weight:800;color:var(--gold-deep);
+  transition:transform .3s var(--ease),background .3s,box-shadow .3s}
+.wf-peek svg{width:17px;height:17px;flex:none;transition:transform .3s var(--ease)}
+.wf-peek:hover{transform:translateY(-3px);background:rgba(156,118,32,.11);box-shadow:var(--shadow-sm)}
+.wf-peek:hover svg{transform:translateX(-5px)}
+html[data-theme="dark"] .wf-banner{border-color:rgba(210,171,78,.32);
+  background:linear-gradient(120deg,rgba(210,171,78,.13),rgba(208,138,86,.1) 55%,rgba(62,137,137,.1))}
+html[data-theme="dark"] .wf-banner::after{background:linear-gradient(115deg,transparent 32%,rgba(242,231,208,.14) 48%,transparent 64%)}
+html[data-theme="dark"] .wf-pill{background:rgba(236,205,125,.14);border:1px solid rgba(236,205,125,.35);box-shadow:none}
+html[data-theme="dark"] .wf-peek{border-color:rgba(210,171,78,.35);background:rgba(210,171,78,.07)}
+@media (max-width:760px){
+  .wf-banner{gap:12px;padding:14px 16px;border-radius:17px}
+  .wf-txt{font-size:.92rem}
+}
 
 /* ============ STATS ============ */
 .stats{border-block:1px solid var(--line);background:var(--card)}
@@ -1147,7 +1180,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
   <div class="geo" aria-hidden="true"></div>
   <div class="hero-stage container">
     <div class="hero-copy">
-      <span class="chip">تشكيلة ٢٠٢٦ وصلت النهارده</span>
+      <span class="chip">عروض الجمعة البيضاء وصلت النهارده</span>
       <h1>مطبخك يستاهل أدوات <em>تدوم<svg viewBox="0 0 220 26" preserveAspectRatio="none" aria-hidden="true"><path d="M6 18 C60 6 160 4 214 12"/></svg></em> معاك</h1>
       <p class="hero-sub">
         <b>أوانيستا</b> — متجرك المصري لأدوات المطبخ الاحترافية. من مقالي الجرانيت
@@ -1173,7 +1206,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
       </div>
       <div class="hv-badge hv-b2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
-        خصم لحد ٢٥٪
+        عروض الجمعة البيضاء
       </div>
     </div>
 
@@ -1187,8 +1220,9 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
 
 <div class="band" aria-hidden="true">
   <div class="band-in" id="band-in">
+    <span>عروض الجمعة البيضاء</span><i>✦</i>
     <span>لفترة محدودة · بينتهي 12/1 2026</span><i>✦</i>
-    <span>خصم لحد ٢٥٪</span><i>✦</i>
+    <span>خصومات لحد ٣٠٪</span><i>✦</i>
     <span>جودة تدوم سنين</span><i>✦</i>
     <span>شحن لكل محافظات مصر</span><i>✦</i>
     <span>ضمان سنتين كاملة</span><i>✦</i>
@@ -1213,9 +1247,9 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
   <div class="aurora" aria-hidden="true"><i></i><i></i></div>
   <div class="container">
     <div class="sec-head">
-      <span class="chip" data-rv="pop">مختارات أوانيستا</span>
+      <span class="chip" data-rv="pop">مختارات الجمعة البيضاء</span>
       <h2 class="sec-title" data-rv="wipe" data-delay="60">أحلى اللي عندنا <span class="acu">متجمعينلك</span></h2>
-      <p class="sec-sub" data-rv data-delay="120">تشكيلة مختارة من أقوى منتجاتنا — والمزيد كله جوه المتجر.</p>
+      <p class="sec-sub" data-rv data-delay="120">تشكيلة مختارة من أقوى منتجاتنا بأسعار الجمعة البيضاء — والمزيد كله جوه المتجر.</p>
     </div>
     <div class="p-grid" id="feat-grid"></div>
     <div class="feat-cta" data-rv data-delay="220">
@@ -1237,9 +1271,16 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
       رجوع للرئيسية
     </button>
     <div class="sec-head">
-      <span class="chip" data-rv="pop">متجر أوانيستا</span>
+      <span class="chip" data-rv="pop">عروض الجمعة البيضاء</span>
       <h2 class="sec-title" data-rv="wipe" data-delay="60">كل منتجات <span class="acu">أوانيستا</span> في مكان واحد</h2>
       <p class="sec-sub" data-rv data-delay="120">٢٣ منتج مختار بعناية من أحلى أدوات المطبخ — جرّبه مرة، وبقية حياتك معاه.</p>
+    </div>
+    <div class="wf-banner" data-rv data-delay="140" role="note" aria-label="عروض الجمعة البيضاء">
+      <span class="wf-pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg>عروض الجمعة البيضاء</span>
+      <span class="wf-txt">خصومات لحد ٣٠٪ على كل المنتجات + شحن مجاني
+        <small>الدفع عند الاستلام · إرجاع مجاني خلال ١٤ يوم · بكميات محدودة</small>
+      </span>
+      <span class="wf-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>بينتهي <b>12/1 2026</b></span>
     </div>
     <div class="filters" data-rv data-delay="160" id="filters"></div>
     <div class="store-meta" data-rv data-delay="200">
@@ -1333,6 +1374,10 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
         <button class="btn btn-primary sn-btn" type="submit">ابعتلي</button>
       </form>
     </div>
+    <a class="wf-peek" href="#store" data-rv data-delay="200">
+      عروض الجمعة البيضاء شغّالة دلوقتي على المتجر — اتفرج قبل ما تخلص
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+    </a>
   </div>
 </section>
 
@@ -1350,7 +1395,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
     <div class="sec-head">
       <span class="chip" data-rv="pop">٣٦٠ درجة</span>
       <h2 class="sec-title" data-rv="wipe" data-delay="60">شوفها من <span class="acu">كل الاتجاهات</span></h2>
-      <p class="sec-sub" data-rv data-delay="120">نماذج حقيقية 3D — اختار أي أداة من تحت ولفّها بإيدك زي ما تحب.</p>
+      <p class="sec-sub" data-rv data-delay="120">نماذج حقيقية 3D — اختار أي أداة من تحت ولفّها بإيدك زي ما تحب، وكلها متاحة بأسعار الجمعة البيضاء.</p>
     </div>
     <div class="mv-stage" id="mv-stage" data-rv data-delay="150">
       <div class="mv-podium" aria-hidden="true"></div>
@@ -1410,7 +1455,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
     <div class="f-grid">
       <div class="f-card" data-rv="right">
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="14" height="12" rx="2"/><path d="M15.5 9h3.5l3 3.5V17h-6.5z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
-        <h3>شحن سريع ومجاني <span class="f-lim">لفترة محدودة</span></h3>
+        <h3>شحن سريع ومجاني <span class="f-lim">عرض الجمعة البيضاء</span></h3>
         <p>توصيل خلال ٤٨ ساعة لكل المحافظات، ومجاني على الطلبات فوق ٢٠٠ ج.م.</p>
       </div>
       <div class="f-card" data-rv="left" data-delay="60">
@@ -1483,9 +1528,9 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
     <svg viewBox="0 0 200 200" fill="none"><circle cx="90" cy="108" r="58" stroke="currentColor" stroke-width="7"/><circle cx="90" cy="108" r="44" stroke="currentColor" stroke-width="4"/><rect x="148" y="99" width="46" height="18" rx="9" stroke="currentColor" stroke-width="6"/></svg>
   </div>
   <div class="container">
-    <span class="chip" data-rv="pop">لفترة محدودة</span>
+    <span class="chip" data-rv="pop">عروض الجمعة البيضاء</span>
     <h2 data-rv data-delay="60">جهّز مطبخك <em>النهارده</em></h2>
-    <p data-rv data-delay="120">وفّر لحد ٣٠٪ على التشكيلة الجديدة + شحن مجاني على كل الطلبات لفترة محدودة.</p>
+    <p data-rv data-delay="120">وفّر لحد ٣٠٪ على كل المنتجات + شحن مجاني على كل الطلبات — عروض الجمعة البيضاء.</p>
     <div class="count" data-rv data-delay="150">
       <div class="c-box"><b id="cd-d">٠</b><span>يوم</span></div>
       <div class="c-box"><b id="cd-h">٠</b><span>ساعة</span></div>
