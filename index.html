@@ -506,6 +506,16 @@ html[data-theme="dark"] .f-lim{background:rgba(194,84,80,.17);color:#e2908c;bord
   .f-lim::before{width:5px;height:5px}
 }
 .features .chip::before{background:var(--teal)}
+/* --- T27: ليه أوانيستا؟ redesign — 2×2 numbered cards, icon on the side --- */
+.features .f-grid{grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,20px)}
+.features .f-card{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:16px;row-gap:3px;align-items:start;padding:24px 22px;border-radius:22px}
+.features .f-icon{grid-row:1/3;width:52px;height:52px;margin-bottom:0}
+.features .f-card h3{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:1.14rem;line-height:1.5;margin-bottom:0}
+.features .f-card p{grid-column:2;align-self:end}
+.features .f-idx{position:absolute;inset-inline-end:16px;top:8px;font-family:var(--font-d);font-weight:700;font-size:2.7rem;line-height:1;color:rgba(156,118,32,.12);pointer-events:none;user-select:none;transition:color .35s ease}
+.features .f-card:hover .f-idx{color:rgba(156,118,32,.24)}
+html[data-theme="dark"] .features .f-idx{color:rgba(210,171,78,.13)}
+html[data-theme="dark"] .features .f-card:hover .f-idx{color:rgba(210,171,78,.25)}
 
 /* ============ WHITE FRIDAY (عروض الجمعة البيضاء) ============ */
 .wf-banner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:-4px 0 28px;padding:16px 20px;
@@ -572,7 +582,7 @@ html[data-theme="dark"] .w-strip{color:#d2ab4e;border-color:rgba(210,171,78,.38)
 /* ============ HOW TO BUY (إزاي تشتري؟) ============ */
 .howbuy{padding:clamp(74px,11vw,120px) 0;position:relative}
 .howbuy .chip::before{background:var(--teal)}
-.h-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.h-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,22px)}
 .h-step{padding:30px 26px;border:1px solid var(--line);border-radius:24px;background:var(--card);position:relative;
   transition:transform .5s var(--ease),box-shadow .4s ease,border-color .35s ease}
 .h-step:hover{transform:translateY(-6px);border-color:rgba(156,118,32,.4);box-shadow:var(--shadow-sm)}
@@ -602,7 +612,7 @@ html[data-theme="dark"] .h-cta{border-color:rgba(210,171,78,.32);
   background:linear-gradient(120deg,rgba(210,171,78,.12),rgba(208,138,86,.09) 55%,rgba(62,137,137,.09))}
 html[data-theme="dark"] .h-term{border-color:rgba(210,171,78,.32);background:rgba(210,171,78,.06)}
 html[data-theme="dark"] .h-phones a{background:rgba(255,255,255,.04)}
-@media (max-width:860px){.h-steps,.h-terms{grid-template-columns:1fr}.h-cta{flex-direction:column;align-items:flex-start}}
+@media (max-width:860px){.h-steps{grid-template-columns:repeat(2,1fr)}.h-terms{grid-template-columns:1fr}.h-cta{flex-direction:column;align-items:flex-start}}
 
 /* ============ STATS ============ */
 .stats{border-block:1px solid var(--line);background:var(--card)}
@@ -616,7 +626,7 @@ html[data-theme="dark"] .h-phones a{background:rgba(255,255,255,.04)}
 
 /* ============ TESTIMONIALS ============ */
 .testis{padding:clamp(74px,11vw,120px) 0}
-.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,24px)}
+.t-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.4vw,24px)}
 .t-card{padding:28px 26px;border:1px solid var(--line);border-radius:24px;background:var(--card);position:relative;
   transition:border-color .35s ease,box-shadow .4s ease,transform .5s var(--ease);will-change:transform}
 .t-card:hover{border-color:rgba(156,118,32,.4);box-shadow:var(--shadow-sm);transform:translateY(-6px)}
@@ -1126,6 +1136,31 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
   .nav.hide{transform:none}
   .sec-title::after{transition:none}
 }
+
+/* --- T27: variant image cross-fade + phone 2×2 card grids (4 sections) --- */
+.p-img{transition:opacity .18s ease}
+@media (max-width:560px){
+  .f-grid,.features .f-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .t-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .h-steps{grid-template-columns:repeat(2,1fr);gap:10px}
+  .f-card{padding:16px 13px;border-radius:16px}
+  .f-icon{width:40px;height:40px;border-radius:12px;margin-bottom:10px}
+  .f-icon svg{width:20px;height:20px}
+  .f-card h3{font-size:.85rem;line-height:1.55;margin-bottom:4px}
+  .f-card p{font-size:.72rem;line-height:1.65}
+  .features .f-card{grid-template-columns:1fr;grid-template-rows:auto auto auto;row-gap:8px;padding:14px 12px}
+  .features .f-icon{grid-row:auto;width:40px;height:40px;margin-bottom:0}
+  .features .f-card p{grid-column:1}
+  .features .f-idx{font-size:1.7rem;inset-inline-end:10px;top:6px}
+  .f-lim{font-size:.56rem;padding-inline:7px;gap:4px}
+  .f-lim::before{width:4px;height:4px}
+  .t-card{padding:16px 13px;border-radius:16px}
+  .t-card p{font-size:.74rem;line-height:1.7}
+  .h-step{padding:16px 13px;border-radius:16px}
+  .h-num{width:38px;height:38px;border-radius:12px;font-size:1.2rem;margin-bottom:10px}
+  .h-step h3{font-size:.85rem}
+  .h-step p{font-size:.72rem;line-height:1.65}
+}
 </style>
 </head>
 <body>
@@ -1413,19 +1448,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
           <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الصور والتفاصيل</span></div>
         </div>
       </article>
-      <article class="s-card" data-soon="1" data-rv data-delay="60" role="button" tabindex="0" aria-label="شوف تفاصيل أطقم حلل ومقالي ARSHIA PLUS">
-        <div class="s-tile">
-          <span class="s-badge"><i></i>قريبًا</span>
-          <img class="p-img" src="img/i088.webp" loading="lazy" decoding="async" alt="أطقم حلل ومقالي ARSHIA PLUS">
-        </div>
-        <div class="s-body">
-          <div class="p-cat">أطقم حلل ومقالي</div>
-          <h3 class="p-name">أطقم حلل ومقالي ARSHIA PLUS</h3>
-          <p class="s-note">نفس الموديل بالظبط متوفر بلونين — أسود وأخضر.</p>
-          <div class="s-soonbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg><span>شوف الصور والتفاصيل</span></div>
-        </div>
-      </article>
-      <article class="s-card" data-soon="2" data-rv data-delay="120" role="button" tabindex="0" aria-label="شوف تفاصيل ترمسات EL ANDALOS GROUP">
+      <article class="s-card" data-soon="1" data-rv data-delay="60" role="button" tabindex="0" aria-label="شوف تفاصيل ترمسات EL ANDALOS GROUP">
         <div class="s-tile">
           <span class="s-badge"><i></i>قريبًا</span>
           <img class="p-img" src="img/i091.webp" loading="lazy" decoding="async" alt="ترمسات EL ANDALOS GROUP">
@@ -1531,21 +1554,25 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
     </div>
     <div class="f-grid">
       <div class="f-card" data-rv="right">
+        <span class="f-idx" aria-hidden="true">٠١</span>
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="14" height="12" rx="2"/><path d="M15.5 9h3.5l3 3.5V17h-6.5z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
         <h3>شحن سريع ومجاني <span class="f-lim">عروض الجمعة البيضاء حتى انتهاء العرض</span></h3>
         <p>توصيل خلال ٤٨ ساعة لكل المحافظات، ومجاني على الطلبات فوق ٢٠٠ ج.م.</p>
       </div>
       <div class="f-card" data-rv="left" data-delay="60">
+        <span class="f-idx" aria-hidden="true">٠٢</span>
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg></div>
         <h3>ضمان سنتين كاملة</h3>
         <p>كل قطعة مضمونة ضد عيوب الصناعة — من غير أسئلة، ومن غير صداع.</p>
       </div>
       <div class="f-card" data-rv="right" data-delay="120">
+        <span class="f-idx" aria-hidden="true">٠٣</span>
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
         <h3>إرجاع خلال ١٤ يوم</h3>
         <p>القطعة ما عجبتكش؟ رجّعها بسهولة وفلوسك ترجعلك كاملة.</p>
       </div>
       <div class="f-card" data-rv="left" data-delay="180">
+        <span class="f-idx" aria-hidden="true">٠٤</span>
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2" y="13" width="4.5" height="7" rx="2"/><rect x="17.5" y="13" width="4.5" height="7" rx="2"/><path d="M20 20a3 3 0 0 1-3 3h-3"/></svg></div>
         <h3>دعم ٢٤/٧</h3>
         <p>فريقنا واقف معاك أي وقت — برد خلال دقايق، مش أيام.</p>
@@ -1591,6 +1618,13 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
         </div>
         <p>"أحسن تجربة تسوّق أونلاين للأدوات، الدعم رد عليّ خلال دقيقتين وحل الموضوع في نفس اللحظة. بقى متجري الأول لأي حاجة في المطبخ."</p>
         <div class="t-who"><div class="t-ava">ف</div><div><b>فاطمة السيد</b><small>المنصورة · مشترية موثقة</small></div></div>
+      </div>
+      <div class="t-card" data-rv="up" data-delay="240">
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 8.5 22 9.3 17 14l1.2 7L12 17.8 5.8 21 7 14 2 9.3 9 8.5z"/></svg>
+        </div>
+        <p>"طقم الحلل الاستانلس وصل بحالة ممتازة والتغليف محترم جدًا. جربت الحلة الكبيرة في العزومة والحرارة كانت موزعة صح من أول مرة. تعبتوا معايا بجد."</p>
+        <div class="t-who"><div class="t-ava">م</div><div><b>محمود إبراهيم</b><small>الجيزة · مشتري موثق</small></div></div>
       </div>
     </div>
   </div>
@@ -1703,6 +1737,11 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
         <h3>استلم طلبك</h3>
         <p>شحن لحد باب بيتك في كل المحافظات، واستبدال المعيب عند الاستلام.</p>
       </div>
+      <div class="h-step" data-rv="left" data-delay="270">
+        <span class="h-num">٤</span>
+        <h3>ادفع وانت مطمّن</h3>
+        <p>بعد ما تستلم وتفحص طلبك، ادفع براحتك — كاش أو إنستاباي أو محفظة إلكترونية.</p>
+      </div>
     </div>
     <div class="h-terms">
       <div class="h-term" data-rv>
@@ -1730,7 +1769,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
         </a>
         <div class="h-phones">
           <a href="tel:01112231510" dir="ltr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>01112231510</a>
-          <a href="tel:01128891853" dir="ltr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>01128891853</a>
+          <a href="tel:01029282833" dir="ltr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>01029282833</a>
         </div>
       </div>
     </div>
