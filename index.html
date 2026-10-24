@@ -494,12 +494,17 @@ html[data-theme="dark"] .band::after{background:linear-gradient(-90deg,#20180d,t
 .f-icon svg{width:25px;height:25px}
 .f-card h3{font-family:var(--font-d);font-weight:700;font-size:1.12rem;margin-bottom:7px}
 .f-card p{color:var(--mut);font-size:.9rem}
-.f-lim{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;margin-inline-start:8px;vertical-align:middle;
+.f-lim{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;margin-inline-start:8px;vertical-align:middle;max-width:100%;
   font-family:var(--font-b);font-size:.68rem;font-weight:800;letter-spacing:.2px;color:var(--red);
   background:rgba(194,84,80,.09);border:1px solid rgba(194,84,80,.3)}
 .f-lim::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);animation:limPulse 1.6s ease-in-out infinite}
 @keyframes limPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.72)}}
 html[data-theme="dark"] .f-lim{background:rgba(194,84,80,.17);color:#e2908c;border-color:rgba(194,84,80,.42)}
+/* desktop 4-col cards are narrow (205px content) — compact the long WF badge so it stays one line */
+@media (min-width:761px){
+  .f-lim{font-size:.58rem;letter-spacing:0;padding-inline:8px;gap:5px;margin-inline-start:0}
+  .f-lim::before{width:5px;height:5px}
+}
 .features .chip::before{background:var(--teal)}
 
 /* ============ WHITE FRIDAY (عروض الجمعة البيضاء) ============ */
@@ -1229,7 +1234,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
 <div class="band" aria-hidden="true">
   <div class="band-in" id="band-in">
     <span>عروض الجمعة البيضاء</span><i>✦</i>
-    <span>لفترة محدودة · بينتهي 12/1 2026</span><i>✦</i>
+    <span>لفترة محدودة · بينتهي 1/12/2026</span><i>✦</i>
     <span>خصومات لحد ٣٠٪</span><i>✦</i>
     <span>جودة تدوم سنين</span><i>✦</i>
     <span>شحن لكل محافظات مصر</span><i>✦</i>
@@ -1288,7 +1293,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
       <span class="wf-txt">خصومات لحد ٣٠٪ على كل المنتجات + شحن مجاني
         <small>الدفع عند الاستلام · إرجاع مجاني خلال ١٤ يوم · بكميات محدودة</small>
       </span>
-      <span class="wf-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>بينتهي <b>12/1 2026</b></span>
+      <span class="wf-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>بينتهي <b>1/12/2026</b></span>
     </div>
     <div class="filters" data-rv data-delay="160" id="filters"></div>
     <div class="store-meta" data-rv data-delay="200">
@@ -1463,7 +1468,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
     <div class="f-grid">
       <div class="f-card" data-rv="right">
         <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="14" height="12" rx="2"/><path d="M15.5 9h3.5l3 3.5V17h-6.5z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
-        <h3>شحن سريع ومجاني <span class="f-lim">عرض الجمعة البيضاء</span></h3>
+        <h3>شحن سريع ومجاني <span class="f-lim">عروض الجمعة البيضاء حتى انتهاء العرض</span></h3>
         <p>توصيل خلال ٤٨ ساعة لكل المحافظات، ومجاني على الطلبات فوق ٢٠٠ ج.م.</p>
       </div>
       <div class="f-card" data-rv="left" data-delay="60">
@@ -1545,7 +1550,7 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
       <div class="c-box"><b id="cd-m">٠</b><span>دقيقة</span></div>
       <div class="c-box"><b id="cd-s">٠</b><span>ثانية</span></div>
     </div>
-    <p class="count-end" data-rv data-delay="170"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>العرض بينتهي <b>12/1 2026</b></p>
+    <p class="count-end" data-rv data-delay="170"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>العرض بينتهي <b>1/12/2026</b></p>
     <a href="#store" class="btn btn-terra" data-rv data-delay="180">
       تسوّق التشكيلة دلوقتي
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
