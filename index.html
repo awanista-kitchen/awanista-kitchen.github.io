@@ -540,6 +540,70 @@ html[data-theme="dark"] .wf-peek{border-color:rgba(210,171,78,.35);background:rg
   .wf-txt{font-size:.92rem}
 }
 
+/* ============ WHY ORIGINAL (ليه الأصلي بسعر أعلى؟) ============ */
+.worig{padding:clamp(74px,11vw,120px) 0;position:relative}
+.worig .chip::before{background:var(--brick)}
+.w-versus{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px);margin-top:28px}
+.w-col{padding:28px 26px;border-radius:24px;border:1px solid var(--line);background:var(--card);
+  transition:transform .5s var(--ease),box-shadow .4s ease,border-color .35s ease}
+.w-col:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm)}
+.w-col h3{font-family:var(--font-d);font-size:1.15rem;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.w-col ul{display:grid;gap:12px}
+.w-col li{position:relative;padding-inline-start:31px;color:var(--ink);font-weight:700;font-size:.95rem;line-height:1.55}
+.w-col li::before{position:absolute;inset-inline-start:0;top:1px;width:21px;height:21px;border-radius:50%;
+  display:grid;place-items:center;font-size:.72rem;font-weight:900}
+.w-col.fake{border-style:dashed}
+.w-col.fake h3{color:var(--mut)}
+.w-col.fake li{color:var(--mut)}
+.w-col.fake li::before{content:"✕";background:rgba(194,84,80,.12);color:var(--red);border:1px solid rgba(194,84,80,.35)}
+.w-col.real{border-color:rgba(156,118,32,.45);background:linear-gradient(150deg,rgba(196,154,58,.1),var(--card) 55%)}
+.w-col.real h3{color:var(--gold-deep)}
+.w-col.real li::before{content:"✓";background:rgba(62,137,137,.13);color:var(--teal);border:1px solid rgba(62,137,137,.4)}
+.w-strip{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;flex-wrap:wrap;
+  padding:15px 20px;border-radius:18px;border:1px dashed rgba(156,118,32,.45);background:rgba(156,118,32,.07);
+  font-weight:800;color:var(--gold-deep)}
+.w-strip svg{width:18px;height:18px;flex:none}
+html[data-theme="dark"] .w-col.real{border-color:rgba(210,171,78,.4);
+  background:linear-gradient(150deg,rgba(210,171,78,.1),var(--card) 55%)}
+html[data-theme="dark"] .w-col.real h3{color:#d2ab4e}
+html[data-theme="dark"] .w-strip{color:#d2ab4e;border-color:rgba(210,171,78,.38);background:rgba(210,171,78,.07)}
+@media (max-width:760px){.w-versus{grid-template-columns:1fr}}
+
+/* ============ HOW TO BUY (إزاي تشتري؟) ============ */
+.howbuy{padding:clamp(74px,11vw,120px) 0;position:relative}
+.howbuy .chip::before{background:var(--teal)}
+.h-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.h-step{padding:30px 26px;border:1px solid var(--line);border-radius:24px;background:var(--card);position:relative;
+  transition:transform .5s var(--ease),box-shadow .4s ease,border-color .35s ease}
+.h-step:hover{transform:translateY(-6px);border-color:rgba(156,118,32,.4);box-shadow:var(--shadow-sm)}
+.h-num{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;margin-bottom:16px;
+  font-family:var(--font-d);font-weight:700;font-size:1.5rem;color:#fff;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold));box-shadow:0 10px 20px -12px rgba(156,118,32,.7)}
+.h-step h3{font-family:var(--font-d);font-weight:700;font-size:1.12rem;margin-bottom:7px}
+.h-step p{color:var(--mut);font-size:.9rem}
+.h-terms{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);margin-top:clamp(14px,2vw,22px)}
+.h-term{padding:20px 22px;border-radius:20px;border:1px dashed rgba(156,118,32,.4);background:rgba(156,118,32,.05)}
+.h-term b{display:flex;align-items:center;gap:8px;font-size:.98rem;margin-bottom:6px}
+.h-term b svg{width:16px;height:16px;color:var(--gold);flex:none}
+.h-term p{color:var(--mut);font-size:.86rem;line-height:1.6}
+.h-cta{margin-top:clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  padding:24px 28px;border-radius:24px;position:relative;overflow:hidden;
+  background:linear-gradient(120deg,rgba(196,154,58,.14),rgba(201,111,74,.1) 55%,rgba(62,137,137,.1));
+  border:1px solid rgba(156,118,32,.35)}
+.h-cta b{display:block;font-family:var(--font-d);font-size:1.25rem}
+.h-cta span{color:var(--mut);font-weight:700;font-size:.9rem}
+.h-cta-acts{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.h-phones{display:flex;gap:10px;flex-wrap:wrap}
+.h-phones a{display:inline-flex;align-items:center;gap:7px;padding:10px 15px;border-radius:999px;font-weight:800;font-size:.9rem;
+  color:var(--ink);border:1px solid var(--line);background:var(--card);transition:transform .3s var(--ease),border-color .3s}
+.h-phones a:hover{transform:translateY(-3px);border-color:rgba(156,118,32,.5)}
+.h-phones svg{width:15px;height:15px;color:var(--teal);flex:none}
+html[data-theme="dark"] .h-cta{border-color:rgba(210,171,78,.32);
+  background:linear-gradient(120deg,rgba(210,171,78,.12),rgba(208,138,86,.09) 55%,rgba(62,137,137,.09))}
+html[data-theme="dark"] .h-term{border-color:rgba(210,171,78,.32);background:rgba(210,171,78,.06)}
+html[data-theme="dark"] .h-phones a{background:rgba(255,255,255,.04)}
+@media (max-width:860px){.h-steps,.h-terms{grid-template-columns:1fr}.h-cta{flex-direction:column;align-items:flex-start}}
+
 /* ============ STATS ============ */
 .stats{border-block:1px solid var(--line);background:var(--card)}
 .stats .container{display:grid;grid-template-columns:repeat(4,1fr);padding-block:clamp(38px,5.5vw,58px);gap:20px}
@@ -1533,6 +1597,62 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
 </section>
 
 
+<!-- ================= WHY ORIGINAL (ليه الأصلي بسعر أعلى؟) ================= -->
+<section class="worig" id="original">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip" data-rv="pop">ليه تشتري من أوانيستا؟</span>
+      <h2 class="sec-title" data-rv="wipe" data-delay="60">ليه الأصلي <span class="acu">بسعر أعلى؟</span></h2>
+      <p class="sec-sub" data-rv data-delay="120">الفرق بين الأصلي والمقلد بيبان مع الاستخدام — الأصلي بيدوم سنين وتدفع مرة واحدة.</p>
+    </div>
+    <div class="f-grid">
+      <div class="f-card" data-rv="right">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/><path d="m12 21-4-12 4-6 4 6-4 12"/></svg></div>
+        <h3>خامة أصلية</h3>
+        <p>استانلس AISI 304 وجرانيت وسيراميك كوري أصلي — مش خامات مخلوطة أو مقلدة.</p>
+      </div>
+      <div class="f-card" data-rv data-delay="60">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></svg></div>
+        <h3>صناعة معروفة</h3>
+        <p>أطقم تركية من الحداد التركي وماركات معروفة زي NETLON و EVITA و ARCHIIA.</p>
+      </div>
+      <div class="f-card" data-rv data-delay="120">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 5-5"/></svg></div>
+        <h3>فحص قبل الشحن</h3>
+        <p>كل منتج بيتفحص بعناية قبل ما يوصلك، واستبدال أي منتج معيب عند الاستلام.</p>
+      </div>
+      <div class="f-card" data-rv="left" data-delay="180">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg></div>
+        <h3>ضمان وثقة</h3>
+        <p>ملاعق ARCHIIA بضمان ٢٥ سنة، وفريق مبيعات بيرد عليك في أي وقت.</p>
+      </div>
+    </div>
+    <div class="w-versus">
+      <div class="w-col fake" data-rv="right">
+        <h3>المقلد</h3>
+        <ul>
+          <li>سعر أقل النهاردة</li>
+          <li>خامة مش مضمونة</li>
+          <li>بيتبدل بسرعة وتدفع تاني</li>
+        </ul>
+      </div>
+      <div class="w-col real" data-rv="left" data-delay="100">
+        <h3>الأصلي من أوانيستا</h3>
+        <ul>
+          <li>سعر أعلى شوية</li>
+          <li>خامة أصلية ومفحوصة</li>
+          <li>بيدوم سنين وتدفع مرة واحدة</li>
+        </ul>
+      </div>
+    </div>
+    <div class="w-strip" data-rv data-delay="160">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg>
+      منتجاتنا كلها أصلية ١٠٠٪ — بتفحص قبل الشحن، والاستبدال متاح عند الاستلام
+    </div>
+  </div>
+</section>
+
+
 <section class="cta">
   <div class="cta-deco cd-1" data-para=".12" aria-hidden="true">
     <svg viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"><path d="M60 8 L60 56"/><path d="M60 56 C50 70 50 108 60 128 C70 108 70 70 60 56 Z"/><path d="M60 56 C40 72 40 106 60 128 C80 106 80 72 60 56 Z"/><path d="M60 56 C30 74 30 104 60 128 C90 104 90 74 60 56 Z"/></svg>
@@ -1555,6 +1675,65 @@ html[data-theme="dark"] .fly-img{border-color:var(--gold-2)}
       تسوّق التشكيلة دلوقتي
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
     </a>
+  </div>
+</section>
+
+
+<!-- ================= HOW TO BUY (إزاي تشتري؟) ================= -->
+<section class="howbuy" id="how">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip" data-rv="pop">خطوات بسيطة وسريعة</span>
+      <h2 class="sec-title" data-rv="wipe" data-delay="60">إزاي <span class="acu">تشتري؟</span></h2>
+      <p class="sec-sub" data-rv data-delay="120">من اختيار الصنف لحد ما يوصل باب بيتك — وفريق المبيعات معاك في كل خطوة.</p>
+    </div>
+    <div class="h-steps">
+      <div class="h-step" data-rv="right">
+        <span class="h-num">١</span>
+        <h3>اختار أصنافك</h3>
+        <p>من المتجر أو الكتالوج — أو اسأل مبيعات أوانيستا عن أي صنف تاني.</p>
+      </div>
+      <div class="h-step" data-rv data-delay="90">
+        <span class="h-num">٢</span>
+        <h3>ابعتلنا الطلب</h3>
+        <p>واتساب أو اتصال، وهنرد عليك بعرض السعر في دقايق.</p>
+      </div>
+      <div class="h-step" data-rv="left" data-delay="180">
+        <span class="h-num">٣</span>
+        <h3>استلم طلبك</h3>
+        <p>شحن لحد باب بيتك في كل المحافظات، واستبدال المعيب عند الاستلام.</p>
+      </div>
+    </div>
+    <div class="h-terms">
+      <div class="h-term" data-rv>
+        <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg>الدفع</b>
+        <p>نقدي أو تحويل بنكي أو إنستاباي أو محفظة إلكترونية.</p>
+      </div>
+      <div class="h-term" data-rv data-delay="90">
+        <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h3.5l2.5 3v3h-6z"/><circle cx="7" cy="18" r="1.7"/><circle cx="16.5" cy="18" r="1.7"/></svg>الشحن والتسليم</b>
+        <p>شحن لجميع المحافظات خلال أيام من تأكيد الطلب.</p>
+      </div>
+      <div class="h-term" data-rv data-delay="180">
+        <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>الاستبدال</b>
+        <p>استبدال أي منتج معيب من المصنع عند الاستلام.</p>
+      </div>
+    </div>
+    <div class="h-cta" data-rv data-delay="140">
+      <div class="h-cta-txt">
+        <b>جاهز تطلب؟</b>
+        <span>اطلب دلوقتي وهنوصلك بسرعة — فريق المبيعات في خدمتك</span>
+      </div>
+      <div class="h-cta-acts">
+        <a class="btn btn-primary" data-magnet href="https://wa.me/201029282833" target="_blank" rel="noopener">
+          اطلب واتساب
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></svg>
+        </a>
+        <div class="h-phones">
+          <a href="tel:01112231510" dir="ltr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>01112231510</a>
+          <a href="tel:01128891853" dir="ltr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>01128891853</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
