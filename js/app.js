@@ -1099,4 +1099,75 @@ var AW_ARRIVALS=window.AW_ARRIVALS||{v:1,knives:false,plus:false,thermos:false};
     },80);
   });
 })();
+
+/* ============================================================
+   V25 ATELIER LUXE — scroll experiences & micro-interactions
+   (all guarded by reduceMotion; zero impact on store logic)
+   ============================================================ */
+
+/* ---------- V25: horizontal showcase — drag, arrows, progress, filter wiring ---------- */
+(function(){
+  const track=$('#hstrip-track');if(!track)return;
+  const bar=$('#hs-bar');
+  const updBar=()=>{
+    if(!bar)return;
+    const max=track.scrollWidth-track.clientWidth;
+    const p=max>0?clamp(track.scrollLeft/max,0,1):0;
+    bar.style.width=(20+p*80).toFixed(1)+'%';
+    bar.style.transform=`translateX(${(p*300).toFixed(1)}%)`;
+  };
+  updBar();
+  track.addEventListener('scroll',updBar,{passive:true});
+  addEventListener('resize',updBar,{passive:true});
+  const step=()=>Math.max(200,track.clientWidth*.6);
+  const dir=document.documentElement.dir==='rtl'?-1:1;
+  const prev=$('#hs-prev'),next=$('#hs-next');
+  if(prev)prev.addEventListener('click',()=>track.scrollBy({left:dir*step(),behavior:reduceMotion?'auto':'smooth'}));
+  if(next)next.addEventListener('click',()=>track.scrollBy({left:-dir*step(),behavior:reduceMotion?'auto':'smooth'}));
+  /* drag to scroll (pointer) — desktop nicety */
+  if(matchMedia('(hover:hover)').matches&&!reduceMotion){
+    let down=false,sx=0,sl=0,moved=false;
+    track.addEventListener('pointerdown',e=>{down=true;moved=false;sx=e.clientX;sl=track.scrollLeft;track.classList.add('drag')});
+    addEventListener('pointermove',e=>{
+      if(!down)return;
+      const dx=e.clientX-sx;
+      if(Math.abs(dx)>6)moved=true;
+      track.scrollLeft=sl-dx;
+    },{passive:true});
+    addEventListener('pointerup',()=>{down=false;track.classList.remove('drag')});
+    track.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation()}},true);
+  }
+  /* category cards → activate the matching store filter chip */
+  $$('.hs-cat').forEach(a=>{
+    a.addEventListener('click',()=>{
+      const f=a.dataset.f;
+      const chip=$$('.f-chip').find(c=>c.dataset.f===f);
+      if(chip)setTimeout(()=>chip.click(),reduceMotion?60:420);
+    });
+  });
+})();
+
+/* ---------- V25: statement pinned progress bar ---------- */
+(function(){
+  const sec=$('.statement'),bar=$('#st-bar');
+  if(!sec||!bar||reduceMotion)return;
+  let ticking=false;
+  const upd=()=>{
+    ticking=false;
+    const r=sec.getBoundingClientRect(),vh=innerHeight;
+    if(r.bottom<0||r.top>vh)return;
+    const p=clamp((vh-r.top)/(vh+r.height),0,1);
+    bar.style.width=(p*100).toFixed(1)+'%';
+  };
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd)}},{passive:true});
+  upd();
+})();
+
+/* ---------- V25: loader backup failsafe (main logic is inline in HTML) ---------- */
+(function(){
+  setTimeout(function(){
+    const b=document.getElementById('boot');
+    if(b){b.classList.add('done');setTimeout(function(){b&&b.remove()},700)}
+  },3000);
+})();
 })();
